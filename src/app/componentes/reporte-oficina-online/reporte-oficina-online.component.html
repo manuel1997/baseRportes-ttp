@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+      <div class="tittle-inside"><span>Oficinas</span></div>
+
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+        <div class="col-lg-12">
+          <app-oficina-status-form #form [hidden]="!mostrarForm"></app-oficina-status-form>
+        </div>
+
+        <div class="col-12">
+          <app-oficina-status-tabla #tabla [hidden]="!mostrarTabla"></app-oficina-status-tabla>
+        </div>
+      </div>
+
+      <app-oficina-status-detalles #detalles [hidden]="!mostrarDetalles"></app-oficina-status-detalles>
+
+    </div>
+  </div>
+
+</div>

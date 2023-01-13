@@ -1,0 +1,30 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+      <button type="button" class="btn btn-form" role="link" (click)="atras()">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <ng-container *ngIf="flag === true" >
+      <div class="content-white no-padding alert-danger w-100">
+        <div class="title-grey">
+          <h4 class="big-grey text-white ">Solicitud generada</h4>
+        </div>
+
+        <h5 class="big-grey blue-c die-m-t "><i class="fas fa-file-export"></i>
+          <p class="font-dashboard">
+            Su solicitud ha sido generada para próximo proceso.
+            El archivo del informe será:
+            <br>
+            {{ archivo }}
+          </p>
+        </h5>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

@@ -1,0 +1,35 @@
+<div class="title-grey">
+  <i class="fas fa-clipboard-list"></i> Motivos de Atención
+</div>
+<table class="t-products">
+  <colgroup>
+    <col span="5" style="border-left: 1px solid #e7e7e7;">
+  </colgroup>
+  <thead>
+    <tr>
+      <td width="8%"><i class="fas fa-hashtag"></i></td>
+      <td><i class="fas fa-puzzle-piece"></i> Series</td>
+      <td width="10%">
+        <input type="checkbox" name="seleccionarTodasLasSeries" [(ngModel)]="seriesTodasSeleccionadas"
+          (change)="seleccionarTodasLasSeries()">
+      </td>
+    </tr>
+  </thead>
+</table>
+
+<div class="content-white no-padding">
+  <table class="t-products">
+    <colgroup>
+      <col span="5" style="border-left: 1px solid #e7e7e7;">
+    </colgroup>
+    <tbody>
+      <tr *ngFor="let serie of series">
+        <th width="8%" scope="row">{{ serie.id }}</th>
+        <td>{{ serie.serie }}</td>
+        <td width="8%">
+          <input type="checkbox" [(ngModel)]="serie.check" (change)="marcar($event)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

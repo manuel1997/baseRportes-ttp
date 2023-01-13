@@ -1,0 +1,61 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="volver()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+         <div class="col-6">
+          <h3 class="text-center big-grey">
+            <i class="fas fa-building"></i>{{ titulo }}
+          </h3>
+        </div>
+     
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12">
+          <label class="input-text">
+            <i class="fas fa-caret-right blue-icon"></i>Serie :{{ serie }}
+          </label>
+        </div>
+        <div class="col-12">
+          <label class="input-text">
+            <i class="fas fa-caret-right blue-icon"></i>Rangos de Fechas: {{ rangoFecha }} 
+          </label>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="35" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td width="50%">Motivo</td>
+            <td width="25%">Veces</td>
+            <td width="25%">Suma</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows">
+            <td> {{ row.detalle }} </td>
+            <td> {{ row.conteo }} </td>
+            <td> {{ row.suma }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

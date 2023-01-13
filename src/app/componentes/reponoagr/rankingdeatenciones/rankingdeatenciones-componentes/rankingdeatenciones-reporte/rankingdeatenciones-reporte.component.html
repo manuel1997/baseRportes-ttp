@@ -1,0 +1,120 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="far fa-calendar-check"></i> Fecha </div>
+    <div class="content-white">
+
+      <div class="row">
+        <div class="col-lg-6 col-xl-6 col-sm-12">
+          <h2 class="big-grey"><i class="far fa-calendar"></i> Rango de Fechas</h2>
+        </div>
+        <div class="col-auto">
+          {{ superior[0] }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="11" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td rowspan="2">Oficina</td>
+            <td rowspan="2">Serie</td>
+            <td colspan="2">Clientes Atendidos</td>
+          </tr>
+          <tr>
+            <td width="16%">#</td>
+            <td width="16%">%</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos">
+            <td>{{ dato.oficina == 'TOT' ? 'Totales' : dato.oficina }}</td>
+            <td>{{ dato.serie }}</td>
+            <td>{{ dato.atendidos_n }}</td>
+            <td align="right">{{ dato.atendidos_porcentaje }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Ranking de Atenciones (No Agrupado)</h1>
+
+  <table width="70%" border='1'>
+    <tr>
+      <td width="25%" align="right"><b>Mes</b></td>
+      <td width="75%"><b>{{ superior[0] }}</b></td>
+    </tr>
+  </table>
+  <br>
+  <table width="70%" border='1'>
+    <tr align="center">
+      <td rowspan="2" width="38%"><b>Oficina</b></td>
+      <td rowspan="2" width="38%"><b>Serie</b></td>
+      <td colspan="2"><b>Clientes Atendidos</b></td>
+    </tr>
+    <tr align="right">
+      <td width="12%"><b>Numero</b></td>
+      <td width="12%"><b>%</b></td>
+    </tr>
+    <tr align="right" *ngFor="let dato of datos; let i = index">
+      <td>{{ dato.oficina == 'TOT' ? 'Totales' : dato.oficina }}</td>
+      <td>{{ dato.serie }}</td>
+      <td>{{ dato.atendidos_n }}</td>
+      <td align="right">{{ dato.atendidos_porcentaje }}</td>
+    </tr>
+  </table>
+
+  </div>
+</div>
+
+<!--
+  <div class="col-md-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Ranking de Atenciones (No Agrupado)</h1>
+
+  <table width="70%" border='1'>
+    <tr>
+      <td bgcolor='#99ccff' width="25%" align="right"><b>Mes</b></td>
+      <td width="75%"><b>{{ superior[0] }}</b></td>
+    </tr>
+  </table>
+  <br>
+  <table width="70%" border='1'>
+    <tr align="center">
+      <td bgcolor='#99ccff' rowspan="2" width="38%"><b>Oficina</b></td>
+      <td bgcolor='#99ccff' rowspan="2" width="38%"><b>Serie</b></td>
+      <td bgcolor='#99ccff' colspan="2"><b>Clientes Atendidos</b></td>
+    </tr>
+    <tr align="right">
+      <td bgcolor='#99ccff' width="12%"><b>#</b></td>
+      <td bgcolor='#99ccff' width="12%"><b>%</b></td>
+    </tr>
+    <tr align="right" *ngFor="let dato of datos; let i = index">
+      <td [attr.bgcolor]="i == datos.length ? '#99ccff' : ''">{{ dato.oficina == 'TOT' ? 'Totales' : dato.oficina }}</td>
+      <td [attr.bgcolor]="i == datos.length ? '#99ccff' : ''">{{ dato.serie }}</td>
+      <td [attr.bgcolor]="i == datos.length ? '#99ccff' : ''">{{ dato.atendidos_n }}</td>
+      <td [attr.bgcolor]="i == datos.length ? '#99ccff' : ''" align="right">{{ dato.atendidos_porcentaje }}</td>
+    </tr>
+  </table>
+-->
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

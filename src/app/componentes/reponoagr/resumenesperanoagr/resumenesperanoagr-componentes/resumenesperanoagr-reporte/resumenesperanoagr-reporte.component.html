@@ -1,0 +1,156 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+
+      <div class="row">
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <label class="input-text">Entre Días :
+            <span class="color-blue">{{ superior[0] }} al {{ superior[1] }}</span>
+          </label>
+          <hr>
+          <label class="input-text">Entre Horas :
+            <span class="color-blue">{{ superior[2] }} Hrs. a {{ superior[3] }} Hrs.</span>
+          </label>
+        </div>
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <label class="input-text">Intervalo : {{ superior[4] }} [min]</label><hr>
+          <label class="input-text">Límite Superior : {{ superior[5] }} [min]</label>
+        </div>
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <!--<label class="input-text">Filtrar por Rango :
+            <input class="input-style float-right">
+          </label>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="11" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td colspan="1">Rango Espera</td>
+            <td colspan="5">Clientes Atendidos</td>
+            <td colspan="2">Clientes Perdidos</td>
+            <td colspan="2">% Total</td>
+            <td rowspan="2">Espera Acumulada</td>
+            <td rowspan="2">Delta Espera Media</td>
+          </tr>
+          <tr>
+            <td width="7%" >[min]</td>
+            <td width="7%" >Normal</td>
+            <td width="7%">TOL</td>
+            <td width="7%">Especial</td>
+            <td width="7%">Total</td>
+            <td width="7%">%</td>
+            <td width="7%">#</td>
+            <td width="7%">%</td>
+            <td width="7%">Rango</td>
+            <td width="7%">Acum.</td>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos">
+            <ng-template [ngIf]="dato.min == 'SERIE'" [ngIfElse]="NoSerie">
+              <th [attr.colspan]="dato.min == 'SERIE' ? 12 : ''">{{ dato.normal }} - {{ dato.tol }}</th>
+            </ng-template>
+            <ng-template #NoSerie>
+              <td>{{ dato.min == 'TOT' ? 'Totales' : dato.min }}</td>
+              <td>{{ dato.normal }}</td>
+              <td>{{ dato.tol }}</td>
+              <td>{{ dato.especial }}</td>
+              <td>{{ dato.total }}</td>
+              <td>{{ dato.porcentaje1 }}</td>
+              <td>{{ dato.n }}</td>
+              <td>{{ dato.porcentaje2 }}</td>
+              <td>{{ dato.rango }}</td>
+              <td align="right">{{ dato.acum }}</td>
+              <td align="right">{{ dato.esperaacum }}</td>
+              <td align="right">{{ dato.desperaacum }}</td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12"  style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <h1>Resumen de Espera (No Agrupado)</h1>
+
+      <table width="90%" border='1'>
+        <tr>
+        <td width="20%" align="right"><b>Rango de Fechas</b></td>
+        <td width="40%"><b>{{ superior[0] }} al {{ superior[1] }}</b></td>
+        <td width="20%" align="right"><b>Intervalo</b></td>
+        <td width="20%"><b>{{ superior[4] }} [min]</b></td>
+        </tr><tr>
+        <td align="right"><b>Rango de Horas</b></td>
+        <td><b>{{ superior[2] }} Hrs. a {{ superior[3] }} Hrs.</b></td>
+        <td align="right"><b>Límite Superior</b></td>
+        <td><b>{{ superior[5] }}  [min]</b></td>
+        </tr>
+      </table>
+      <br>
+      <table width="90%" border='1'>
+        <tr align="center">
+          <td><b>Rango Espera</b></td>
+          <td colspan="5"><b>Clientes Atendidos</b></td>
+          <td colspan="2"><b>Clientes Perdidos</b></td>
+          <td colspan="2"><b>% Total</b></td>
+          <td rowspan="2"><b>Espera<br>Acum</b></td>
+          <td rowspan="2"><b>Delta Espera<br>Acum</b></td>
+        </tr>
+        <tr align="right">
+          <td align="center"><b>[ min ]</b></td>
+          <td><b>Nor</b></td>
+          <td><b>TOL</b></td>
+          <td><b>Esp</b></td>
+          <td><b>Tot</b></td>
+          <td><b>%</b></td>
+          <td><b>Numero</b></td>
+          <td><b>%</b></td>
+          <td><b>Rango</b></td>
+          <td><b>Acum.</b></td>
+        </tr>
+        <tr align="right" *ngFor="let dato of datos">
+          <ng-template [ngIf]="dato.min == 'SERIE'" [ngIfElse]="NoSerie">
+            <th [attr.colspan]="dato.min == 'SERIE' ? 12 : ''">{{ dato.normal }} - {{ dato.tol }}</th>
+          </ng-template>
+          <ng-template #NoSerie>
+            <td>{{ dato.min == 'TOT' ? 'Totales' : dato.min }}</td>
+            <td>{{ dato.normal }}</td>
+            <td>{{ dato.tol }}</td>
+            <td>{{ dato.especial }}</td>
+            <td>{{ dato.total }}</td>
+            <td>{{ dato.porcentaje1 }}</td>
+            <td>{{ dato.n }}</td>
+            <td>{{ dato.porcentaje2 }}</td>
+            <td>{{ dato.rango }}</td>
+            <td align="right">{{ dato.acum }}</td>
+            <td align="right">{{ dato.esperaacum }}</td>
+            <td align="right">{{ dato.desperaacum }}</td>
+          </ng-template>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

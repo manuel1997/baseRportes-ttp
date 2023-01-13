@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Producción</span></div>
+      <div class="arrow-right"></div>
+
+        <div class="row row-explorer">
+
+          <div class="col-lg-6 col-12 col-md-6 col-sm-12">
+            <app-produccion-form #formulario [hidden]="!mostrarForm"></app-produccion-form>
+          </div>
+
+          <div class="col-lg-6 col-12 col-md-6 col-sm-12">
+                     
+              <app-serie-radio #series [hidden]="!mostrarForm"></app-serie-radio>
+          </div>
+            
+            <div class="col-12">
+              <app-produccion-tabla #tabla [hidden]="!mostrarTabla"></app-produccion-tabla>
+            
+        </div>
+
+      </div>
+
+      <app-produccion-reporte #reporte [hidden]="!mostrarReporte"></app-produccion-reporte>
+     
+    </div>
+
+  </div>
+</div>

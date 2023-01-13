@@ -1,0 +1,31 @@
+<div class="title-grey"><i class="far fa-file-alt"></i> Parámetros del Reporte</div>
+<div class="content-white">
+  <div class="row ml-1 mr-1">
+    <form class="row" [formGroup]="parametros">
+      <div class="col-2 col-xs-12">
+        <label class="input-text">Desde</label>
+      </div>
+      <div class="col-4">
+          <input class="input-style" type="date" formControlName="diaI">
+      </div>
+      <div class="col-2 col-xs-12">
+        <label class="input-text">Hasta</label>
+      </div>
+      <div class="col-4">
+          <input class="input-style" type="date" formControlName="diaF">
+      </div>
+      <div class="col-12">
+        <hr>
+      </div>
+      <!--<div class="col-4 align-middle">
+        <label class="input-text">Filtrar por Oficina</label>
+      </div>
+      <div class="col-6 align-middle">
+        <input class="input-style">
+      </div>
+      <div class="col-1 align-middle">
+        <button class="blue-bottom-small"><i class="fas fa-arrow-alt-circle-right"></i></button>
+      </div>-->
+    </form>
+  </div>
+</div>

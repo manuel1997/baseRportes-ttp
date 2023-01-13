@@ -1,0 +1,193 @@
+<!-- Sidebar -->
+<nav id="sidebar" class="home active">
+  <div class="sidebar-header">
+    <img src="assets/img/logo-white.jpg" width="300" alt="lootipo cliente">
+  </div>
+
+  <ul class="list-unstyled components">
+    <li  [routerLinkActive]="['active']">
+      <a href="#principalSubmenu" data-toggle="collapse" aria-expanded="false" >
+        <i class="fas fa-file-alt"></i><span class="center">Reportes</span><i style="float:right" class="fas fa-chevron-circle-right mt-2"></i></a>
+
+      <ul class="collapse list-unstyled" id="principalSubmenu">
+        <li [routerLinkActive]="['active1']">
+          <a href="#Reportes-Batch" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-sticky-note"></i><span>Reportes Batch</span></a>
+
+          <ul class="collapse list-unstyled" id="Reportes-Batch">
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/reportesBatchListado']">
+                <span class="bar-li"><i class="far fa-file"></i> Revisar archivos batch</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/reportesBatch']">
+                <span class="bar-li"><i class="far fa-file"></i> Reporte DWH</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li [routerLinkActive]="['active1']">
+          <a href="#Reportes-Globales-Agrupados" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="far fa-copy"></i><span>Reportes Globales Agrupados</span></a>
+
+          <ul class="collapse list-unstyled" id="Reportes-Globales-Agrupados">
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repAgrResumenEspera']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Espera</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repAgrResumenAtencion']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Atención</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#Reportes-Globales-No-Agrupados" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-file"></i><span>Reportes Globales No Agrupados</span></a>
+          <ul class="collapse list-unstyled" id="Reportes-Globales-No-Agrupados">
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrRangoEspera']">
+                <span class="bar-li"><i class="far fa-file"></i> Rango de Espera</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrRangoAtencion']">
+                <span class="bar-li"><i class="far fa-file"></i> Rango de Atención</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrTendenciAtencion']">
+                <span class="bar-li"><i class="far fa-file"></i> Tendencia de Atenciones</span></a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrCargaTrabajo']">
+                <span class="bar-li"><i class="far fa-file"></i> Carga de Trabajo por Hora</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrResumenEspera']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Espera</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrResumenAtencion']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Atención</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrResumenMensual']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen Mensual</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrRankingAtenciones']">
+                <span class="bar-li"><i class="far fa-file"></i> Ranking de Atenciones</span>
+              </a>
+            </li>
+            <!-- <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/repnoagrResumenTOL']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen TOL</span>
+              </a>
+            </li> -->
+
+          </ul>
+        </li>
+        <li>
+          <a href="#Reportes-por-Oficina" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="far fa-building"></i><span>Reportes por Oficina</span></a>
+          <ul class="collapse list-unstyled" id="Reportes-por-Oficina">
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/motivosDePausa']">
+                <span class="bar-li"><i class="far fa-file"></i> Motivos de Pausa</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/resumenDeEjecutivo']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Ejecutivo</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/estadoDeEjecutivos']">
+                <span class="bar-li"><i class="far fa-file"></i> Estado diario de Ejecutivo</span>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+        <li>
+          <a href="#Reportes-por-Serie" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-file-invoice"></i> <span>Reportes por Serie</span>
+          </a>
+          <ul class="collapse list-unstyled" id="Reportes-por-Serie">
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/reportePorSerieproduccion']">
+                <span class="bar-li"><i class="far fa-file"></i> Producción</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/reportePorSerierankingDeEjecutivos']">
+                <span class="bar-li"><i class="far fa-file"></i> Ranking de Ejecutivos</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/cargaDeTrabajoDiaria']">
+                <span class="bar-li"><i class="far fa-file"></i> Carga de Trabajo Diaria</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/resumenDeOficina']">
+                <span class="bar-li"><i class="far fa-file"></i> Resumen de Oficina</span>
+              </a>
+            </li>
+            <li [routerLinkActive]="['active1']">
+              <a [routerLink]="['/motivosDeAtencion']">
+                <span class="bar-li"><i class="far fa-file"></i> Motivos de Atención</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li  [routerLinkActive]="['active']">
+      <a href="#oficinas" data-toggle="collapse" aria-expanded="false" >
+        <i class="fas fa-building"></i><span class="center">Oficinas</span><i style="float:right" class="fas fa-chevron-circle-right mt-2"></i>
+      </a>
+      <ul class="a list-unstyled collapse" id="oficinas">
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/dashboard']"><i class="fas fa-building"></i> <span>Oficinas Dashboard</span></a>
+      </li>
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/oficinasReportes']"><i class="fas fa-building"></i> <span>Oficinas Resumen</span></a>
+      </li>
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/vistaonline']"><i class="fas fa-eye"></i> <span>Vista Online</span></a>
+      </li>
+      </ul>
+    </li>
+    <!-- <li  [routerLinkActive]="['active']">
+      <a href="#herramientas" data-toggle="collapse" aria-expanded="false" >
+        <i class="fas fa-cogs"></i><span class="center">Herramientas</span><i style="float:right" class="fas fa-chevron-circle-right mt-2"></i>
+      </a>
+      <ul class="a list-unstyled collapse" id="herramientas">
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/busquedaCliente']">
+            <i class="fas fa-user"></i> <span > Búsqueda cliente</span></a>
+      </li>
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/busquedaTicket']"><i class="fas fa-ticket-alt"></i><span>Búsqueda ticket</span></a>
+      </li>
+      <li [routerLinkActive]="['active1']">
+          <a [routerLink]="['/busquedaTicketSucursal']"><i class="fas fa-building"></i><span>Reporte tickets por sucursal</span></a>
+      </li>
+      </ul>
+    </li> -->
+    <li  [routerLinkActive]="['active']">
+      <a href="{{ ruta }}/administrador/" target="_blank" (click)="verificarRedireccion()">
+        <i class="fas fa-poll-h"></i><span class="center">Administrador</span>
+      </a>
+    </li>
+  </ul>
+</nav>

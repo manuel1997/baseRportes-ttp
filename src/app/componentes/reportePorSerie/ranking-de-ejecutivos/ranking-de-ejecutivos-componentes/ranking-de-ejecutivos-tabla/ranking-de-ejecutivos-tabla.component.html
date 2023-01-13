@@ -1,0 +1,135 @@
+<table class="t-products">
+  <colgroup>
+    <col span="11" style="border: 1px solid #e7e7e7;">
+  </colgroup>
+  <thead>
+    <tr>
+      <td>&nbsp;<i class="fas fa-hashtag"></i>&nbsp;</td>
+      <td><i class="fas fa-building"></i> Oficina</td>
+      <td width="4%"></td>
+      <td width="4%"></td>
+      <td width="12%">Fecha Min</td>
+      <td width="12%">Fecha Max</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let oficina of oficinas">
+      <td scope="row">{{ oficina.id }}</td>
+      <td>{{ oficina.oficina }}</td>
+      <td>
+        <button type="button" class="btn button-list" (click)="enviar(oficina.id)" title="Reportes">
+          <i class="far fa-list-alt"></i>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn button-list" (click)="excel(oficina.id)" title="Exportar Excel">
+          <i class="far fa-file-excel"></i>
+        </button>              
+      </td>
+      <td>{{ oficina.fechamin }}</td>
+      <td>{{ oficina.fechamax }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Ranking de Ejecutivos</h1>
+    <table width="50%" border='1'>
+      <tr>
+      <td align="right"><b>Oficina</b></td>
+      <td><b>{{ superior[0] }}</b></td>
+      </tr><tr>
+      <td align="right"><b>Serie</b></td>
+      <td><b>{{ superior[1] }}</b></td>
+      </tr><tr>
+      <td align="right"><b>Entre Días</b></td>
+      <td><b>{{ superior[2] }} al {{ superior[3] }}</b></td>
+      </tr>
+    </table>
+    <br>
+
+    <table width="80%" border='1'>
+      <tr align="center">
+        <td width="15%"><b>Ranking</b></td>
+        <td width="40%"><b>Ejecutivo</b></td>
+        <td width="15%"><b>Atenciones</b></td>
+        <td width="15%"><b>Tpo Medio</b></td>
+        <td width="15%"><b>% On/Off</b></td>
+      </tr>
+      <tr *ngFor="let dato of datos; let i = index">
+        <ng-template [ngIf]="i+1 == datos.length" [ngIfElse]="Ultima">
+          <th>{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</th>
+          <td></td>
+          <th>{{ dato.ate }}</th>
+        </ng-template>
+        <ng-template #Ultima>
+          <td>{{ dato.rank }}</td>
+          <td >{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</td>
+          <td>{{ dato.ate }}</td>
+          <td>{{ dato.tpo_m }}</td>
+          <td>{{ dato.on_off }}</td>
+        </ng-template>
+      </tr>
+      
+      <tr align="center">
+        <td><b>Totales</b></td>
+        <td></td>
+        <td><b>1201</b></td>
+        <td colspan="2"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!--
+  <div class="col-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Ranking de Ejecutivos</h1>
+    <table width="50%" border='1'>
+      <tr>
+      <td bgcolor='#99ccff' align="right"><b>Oficina</b></td>
+      <td><b>{{ superior[0] }}</b></td>
+      </tr><tr>
+      <td bgcolor='#99ccff' align="right"><b>Serie</b></td>
+      <td><b>{{ superior[1] }}</b></td>
+      </tr><tr>
+      <td bgcolor='#99ccff' align="right"><b>Entre Días</b></td>
+      <td><b>{{ superior[2] }} al {{ superior[3] }}</b></td>
+      </tr>
+    </table>
+    <br>
+
+    <table width="80%" border='1'>
+      <tr align="center">
+        <td bgcolor='#99ccff' width="15%"><b>Ranking</b></td>
+        <td bgcolor='#99ccff' width="40%"><b>Ejecutivo</b></td>
+        <td bgcolor='#99ccff' width="15%"><b>Atenciones</b></td>
+        <td bgcolor='#99ccff' width="15%"><b>Tpo Medio</b></td>
+        <td bgcolor='#99ccff' width="15%"><b>% On/Off</b></td>
+      </tr>
+      <tr *ngFor="let dato of datos; let i = index">
+        <ng-template [ngIf]="i+1 == datos.length" [ngIfElse]="Ultima">
+          <th bgcolor='#99ccff'>{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</th>
+          <td></td>
+          <th bgcolor='#99ccff'>{{ dato.ate }}</th>
+        </ng-template>
+        <ng-template #Ultima>
+          <td>{{ dato.rank }}</td>
+          <td [attr.bgcolor]="dato.ejecutivo == 'TOT' ? '#99ccff' : ''">{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</td>
+          <td>{{ dato.ate }}</td>
+          <td>{{ dato.tpo_m }}</td>
+          <td>{{ dato.on_off }}</td>
+        </ng-template>
+      </tr>
+      
+      <tr align="center">
+        <td bgcolor='#99ccff'><b>Totales</b></td>
+        <td></td>
+        <td bgcolor='#99ccff'><b>1201</b></td>
+        <td colspan="2"></td>
+      </tr>
+    </table>
+  </div>
+-->

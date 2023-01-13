@@ -1,0 +1,129 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="far fa-calendar-check"></i> Fecha </div>
+    <div class="content-white">
+
+      <div class="row">
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <h2 class="big-grey"><i class="far fa-calendar"></i> Rango de Fechas</h2>
+        </div>
+
+        <div class="col-lg-4 col-xl-4 col-sm-12 die-m-t">
+            <i class="fas fa-clock blue-icon"></i>
+          <label class="input-text">Mes :
+            <span class="color-blue">{{ superior[0] }}</span>
+          </label>
+        </div>
+
+        <div class="col-lg-4 col-xl-4 col-sm-12 die-m-t">
+            <i class="fas fa-clock blue-icon"></i>
+          <label class="input-text">Entre Horas :
+            <span class="color-blue">{{ superior[1] }} Hrs. a {{ superior[2] }} Hrs.</span>
+          </label>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="12" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td rowspan="2">Oficina</td>
+            <td rowspan="2">Serie</td>
+            <td rowspan="2">Turnos Emitidos</td>
+            <td colspan="4">Turnos Atendidos</td>
+            <td colspan="3">Turnos Perdidos</td>
+            <td colspan="3">Tiempos Promedio</td>
+          </tr>
+          <tr>
+            <td>Normal</td>
+            <td>TOL</td>
+            <td>Especial</td>
+            <td>Total</td>
+            <td>#</td>
+            <td>#TOL</td>
+            <td>%</td>
+            <td>Espera</td>
+            <td>Delta Espera</td>
+            <td>Atención</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let dato of datos; let i = index">
+            <td *ngFor="let dat of dato; let j = index" [attr.rowspan]="j == 0 ? datos[0][0] : ''"
+            [hidden]="j == 0">
+              {{ dat=='TOT' ? 'Totales' : dat }}
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Resumen Mensual</h1>
+
+    <table width="50%" border='1'>
+      <tr>
+      <td align="right"><b>Mes</b></td>
+      <td><b>{{ superior[0] }}</b></td>
+      </tr><tr>
+      <td align="right"><b>Entre Horas</b></td>
+      <td><b>{{ superior[1] }} Hrs. a {{ superior[2] }} Hrs.</b></td>
+      </tr>
+    </table>
+    <br>
+
+    <table width="90%" border='1'>
+      <tr align="center">
+        <td rowspan="2"><b>Oficina</b></td>
+        <td rowspan="2"><b>Serie</b></td>
+        <td rowspan="2"><b>Turnos<br>Emitidos</b></td>
+        <td colspan="4"><b>Turnos Atendidos</b></td>
+        <td colspan="3"><b>Turnos Perdidos</b></td>
+        <td colspan="3"><b>Tiempos Prom</b></td>
+      </tr>
+      <tr align="center">
+        <td><b>Normal</b></td>
+        <td><b>TOL</b></td>
+        <td><b>Especial</b></td>
+        <td><b>Total</b></td>
+        <td><b>Numero</b></td>
+        <td><b>Numero TOL</b></td>
+        <td><b>%</b></td>
+        <td><b>Espera</b></td>
+        <td><b>Delta Espera</b></td>
+        <td><b>Atención</b></td>
+      </tr>
+      <tr align="right" *ngFor="let dato of datos; let i = index">
+        <td *ngFor="let dat of dato; let j = index" [attr.rowspan]="j == 0 ? datos[0][0] : ''"
+        [hidden]="j == 0" [attr.align]="j == 0 ? 'left' : ''" [attr.valign]="j == 0 ? 'top' : ''">
+          {{ dat=='TOT' ? 'Totales' : dat }}
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

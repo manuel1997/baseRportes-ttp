@@ -1,0 +1,94 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="volver()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-lg-12 ">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="text-center big-grey">
+            <i class="fas fa-building"></i>{{ titulo }}
+          </h3>
+        </div>
+      
+        <div class="col-6">
+          <div class="row">
+          <div class="col-12">
+            <label class="input-text">
+                <i class="fas fa-clock blue-icon"></i>Serie :{{ serie }}
+          </label>
+          </div>
+          <div class="col-12">
+          <label class="input-text">
+              <i class="fas fa-clock blue-icon"></i>Día: {{ rangoFecha }}
+          </label>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="35" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td width="10%" rowspan="2">Hora</td>
+            <td width="10%"rowspan="2">Turnos Emitidos</td>
+            <td width="30%"colspan="3">Turnos Atendidos</td>
+            <td width="10%"rowspan="2">Turnos Perdidos</td>
+            <td width="10%"rowspan="2">Turnos Perdidos TOL</td>
+            <td width="10%"rowspan="2">Ejecutivos Activos</td>
+            <td width="10%"rowspan="2">Espera Media</td>
+            <td width="10%"rowspan="2">Delta Espera Media</td>
+          </tr>
+          <tr>
+            <td>Normal</td>
+            <td>TOL</td>
+            <td>Especial</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let row of rows_cargaDeTrabajoDiaria">
+            <td scope="row"> {{ row.hora }} </td>
+            <td> {{ row.turnosEmitidos }} </td>
+            <td> {{ row.turnosAtendidosNormal }} </td>
+            <td> {{ row.turnosAtendidosTOL }} </td>
+            <td> {{ row.turnosAtendidosEspecial }} </td>
+            <td> {{ row.turnosPerdidos }} </td>
+            <td> {{ row.turnosPerdidosTOL }} </td>
+            <td> {{ row.ejecutivosActivos }} </td>
+            <td> {{ row.esperaMedia }} </td>
+            <td> {{ row.deltaEsperaMedia }} </td>
+          </tr>
+          <tr class="text-center">
+            <th scope="col" rowspan="2">Totales</th>
+            <th rowspan="2">{{ totalTurnosEmitidos }}</th>
+            <th scope="col">{{ totalNormal }}</th>
+            <th scope="col">{{ totalTOL }}</th>
+            <th scope="col">{{ totalEspecial }}</th>
+            <th scope="col">{{ totalTurnosPerdidos }}</th>
+            <th scope="col">{{ totalTurnosPerdidosTOL }}</th>
+          </tr>
+          <tr class="text-center">
+            <th scope="col" colspan="5">{{ totalGeneral }}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--
+  
+-->
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

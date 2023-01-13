@@ -1,0 +1,254 @@
+<div class="row row-explorer">
+  <div class="col-xl-12 col-lg-12 col-xs-4">
+      <div class="top-button">
+          <button type="button" class="btn btn-form" role="link" (click)="atras()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+      </div>
+  </div>
+  <div class="col-12">
+      <div class="title-grey"><i class="far fa-calendar-check"></i> Fecha </div>
+
+      <div class="content-white">
+          <div class="row">
+              <div class="col-5">
+                  <h5 class="big-grey"><i class="fas fa-building"></i> {{ this.oficina }}</h5>
+              </div>
+              <div class="col-3"> <i class="fas fa-clock blue-icon"></i><label class="input-text">Intervalo <span class="detalle">(min)</span></label>
+                  <select #IntervaloDetalle class="input-style float-right no-padding vei-p" (change)="intervalo($event.target.value)">
+            <option>3</option>
+            <option>5</option>
+            <option>7</option>
+            <option>10</option>
+          </select>
+              </div>
+              <div class="col-2">
+                  <i class="fas fa-caret-right blue-icon"></i>
+                  <label class="input-text">{{ this.status }}</label>
+
+              </div>
+              <div class="col-2">
+                  <i class="fas fa-caret-right blue-icon"></i>
+                  <label class="input-text">{{ this.dia }}</label>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <div class="col-lg-4 col-xl-4 col-sm-12  mt-1 mb-1" *ngFor="let row of rows_series; let i = index">
+      <div class="title-blue">Serie | {{ row.serie }}</div>
+      <div class="content-white">
+        <h4 class="text-center color-blue font-italic"> Emitidos : {{ row.emitidos }}</h4>
+        <div class="row mini-box">
+          <div class="col-12">
+            <hr class="mid-mar">
+          </div>
+          <div class="col-12 text-center">
+            <h5><i class="fas fa-user blue-icon"></i> Atendidos</h5>
+          </div>
+          <div class="col-4 text-center"><span class="detalle">Normal</span><br><span
+              class="big-grey">{{ row.AteNormal }}</span></div>
+          <div class="vertical_line"></div>
+          <!-- <div class="col-2 text-center"><span class="detalle">TOL</span><br><span
+              class="big-grey">{{ row.AteTOL }}</span></div> -->
+          <div class="vertical_line"></div>
+          <div class="col-4 text-center"><span class="detalle">Especial</span><br><span
+              class="big-grey">{{ row.AteEsp }}</span></div>
+          <div class="vertical_line"></div>
+          <div class="col-4 text-center"><span class="detalle">Total</span><br><span
+              class="big-grey">{{ row.AteTotal }}</span></div>
+
+          <div class="col-12">
+            <hr class="mid-mar">
+          </div>
+
+          <div class="col-5 pr-0">
+            <i class="fas fa-user-times blue-icon"></i><span class="detalle"> Perdidos :
+              {{ row.perdidos }}</span>
+          </div>
+          <!-- <div class="col-7">
+            <i class="fas fa-user-alt-slash blue-icon"></i> <span class="detalle"> Cancelados TOL
+              :</span><span class="big-grey"> {{ row.cancelados }}</span>
+          </div> -->
+
+          <div class="col-12">
+            <hr class="mid-mar">
+          </div>
+
+          <div class="col-4 pr-0">
+            <i class="fas fa-pause-circle blue-icon"></i><span class="detalle"> En espera</span>
+          </div>
+
+          <div class="col-4 pr-0 pl-1">
+            <span class="detalle">Oficina : {{ row.EspOficina }} </span>
+            <!-- <h6 class="big-grey">
+                                          </h6> -->
+          </div>
+
+          <!-- <div class="col-4 pr-0 pl-1 ">
+            <span class="detalle">TOL: {{ row.EspTOL }}</span>
+          </div> -->
+
+          <div class="col-12">
+            <hr class="mid-mar">
+          </div>
+
+          <div class="col-12 text-center">
+            <h5><i class="fas fa-clock  blue-icon"></i> Tiempo Máximo</h5>
+          </div>
+          <div class="col-6 pr-0">
+            <!-- <span class="big-grey">{{ row.TMEspera }}</span></div> -->
+            <h6 class="big-grey detalle" [ngClass]="{'red-t': row.TMEspera < 0}"> <i
+                class="fas fa-pause-circle blue-icon"></i>Espera:
+              {{ row.TMEspera | convertirSegundosHora }}</h6>
+          </div>
+          <div class="vertical_small"></div>
+          <div class="col-6 pr-0">
+            <!-- <span class="big-grey">{{ row.TMAtencion }}</span> -->
+            <h6 class="big-grey detalle" [ngClass]="{'red-t': row.TMAtencion < 0}"><i
+                class="fas fa-check-circle blue-icon"></i>Atención:
+              {{ row.TMAtencion | convertirSegundosHora }}</h6>
+          </div>
+
+          <div class="col-12">
+            <hr class="mid-mar">
+          </div>
+
+          <div class="col-12 text-center">
+            <i class="fas fa-users blue-icon"></i> <span class="detalle">Ejecutivos Activos:
+            </span><span class="big-grey">{{ row.eje }}</span>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row pl-4">
+      <div class="col-2">
+          <div class="cuadro-azul">Estado de Escritorios</div>
+      </div>
+      <div class="col-10">
+          <div class='icon-color-box'>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-01.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-01.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>Escritorio no activado, Sin clientes en espera</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-02.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-02.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>Escritorio no activado, Con clientes en espera</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-03.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-03.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>Esperando por una nueva atención</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-04.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-04.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>Atendiendo con tiempo de atención inferior al tiempo Máximo</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-05.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-05.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>Atendiendo con tiempo de atención superior al tiempo Máximo</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-06.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-06.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>En Pausa, sin cliente en espera</div>
+                  </div>
+              </div>
+              <div class='link'>
+                  <div class='prev'><img src="assets/img/of-07.svg" width="10px"></div>
+                  <div class='small'><img src="assets/img/of-07.svg" width="20px"></div>
+                  <div class='full'>
+                      <div class='f2'>En Pausa, con clientes en espera</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-12 mt-2">
+      <div class="content-white no-padding ">
+
+          <table class="t-products">
+              <colgroup>
+                  <col span="11" style="border: 1px solid #e7e7e7;">
+              </colgroup>
+              <thead>
+                  <tr>
+                      <td class="no-break" rowspan="2">Esc</td>
+                      <td rowspan="2">Ejecutivo</td>
+                      <td rowspan="2"></td>
+                      <td rowspan="2">Serie</td>
+                      <td colspan="3">Atendidos</td>
+                      <td colspan="3">Última Atención</td>
+                      <td class="no-break" rowspan="2">Tpo Pro Atención</td>
+                      <td colspan="2">Tiempo Promedio</td>
+                  </tr>
+                  <tr>
+                      <td class="no-break">Normal</td>
+                      <!-- <td class="no-break">TOL</td> -->
+                      <td class="no-break">Especial</td>
+                      <td class="no-break">Total</td>
+                      <td class="no-break">Turno</td>
+                      <td class="no-break">H Inicio</td>
+                      <td width="10%" class="no-break">Id Cliente</td>
+                      <td class="no-break">Motivo</td>
+                      <td class="no-break">Hora</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let dato of rows_esc">
+                      <ng-template [ngIf]="dato.filas != 0" [ngIfElse]="ConInfo">
+                          <td [attr.rowspan]="dato.filas">{{ dato.indice }}</td>
+                          <td [attr.rowspan]="dato.filas">{{ dato.ejecutivo }}</td>
+                          <td>
+                              <img [src]="dato.status" width="10px">
+                          </td>
+                          <td>{{ dato.serie }}</td>
+                          <td>{{ dato.AteNormal }}</td>
+                          <!-- <td>{{ dato.AteTOL }}</td> -->
+                          <td>{{ dato.AteEsp }}</td>
+                          <td>{{ dato.AteTotal }}</td>
+                          <td>{{ dato.turno }}</td>
+                          <td class="no-break">{{ dato.hinicio }}</td>
+                          <td class="no-break">{{ dato.id_cliente }}</td>
+                          <td> <span [ngClass]="{'red-t': dato.tpo < 0}">{{ dato.tpo | convertirSegundosHora }}</span></td>
+                          <td class="no-break" [attr.rowspan]="dato.filas">{{ dato.motivo_pausa }}</td>
+                          <td [attr.rowspan]="dato.filas">{{ dato.hora_pausa }}</td>
+                      </ng-template>
+                      <ng-template #ConInfo>
+                          <td>
+                              <img [src]="dato.status" width="10px">
+                          </td>
+                          <td>{{ dato.serie }}</td>
+                          <td>{{ dato.AteNormal }}</td>
+                          <!-- <td>{{ dato.AteTOL }}</td> -->
+                          <td>{{ dato.AteEsp }}</td>
+                          <td>{{ dato.AteTotal }}</td>
+                          <td>{{ dato.turno }}</td>
+                          <td>{{ dato.hinicio }}</td>
+                          <td>{{ dato.id_cliente }}</td>
+                          <td> <span [ngClass]="{'red-t': dato.tpo < 0}">{{ dato.tpo | convertirSegundosHora }}</span></td>
+                      </ng-template>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+
+  </div>
+</div>

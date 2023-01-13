@@ -1,0 +1,60 @@
+<div class="title-grey">
+  <i class="far fa-file-alt"></i> Parámetros del Reporte
+</div>
+<div class="content-white">
+
+  <div class="row mr-1 ml-1">
+    <form [formGroup]="parametros" (ngSubmit)="enviar()" class="row">
+      <div class="col-6 col-xs-12">
+        <label class="input-text">Mes</label>
+        <input class="input-style float-right och-p" type="date" formControlName="Mes">
+      </div>
+      <div class="col-4 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+        <label class="input-text">Rango Espera<span class="detalle"> (min)</span></label>
+      </div>
+      <div class="col-2">
+        <input class="input-style" formControlName="rango">
+      </div>
+      <div class="col-12"><hr class="mid-mar"></div>
+
+      <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+        <label class="input-text align-middle">Hora Inicial 1<span class="detalle"> (24hrs)</span></label>
+      </div>
+      <div class="col-2">
+        <input class="input-style" formControlName="horaI1" type="number" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+      </div>
+      <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+        <label class="input-text">Hora Final 1<span class="detalle"> (24hrs)</span></label>
+      </div>
+      <div class="col-2">
+        <input class="input-style" formControlName="horaF1" type="number" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+      </div>
+      <div class="col-12"><hr class="mid-mar"></div>
+                
+      <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+        <label class="input-text">Hora Inicial 2<span class="detalle"> (24hrs)</span></label>
+      </div>
+     
+      <div class="col-2">
+        <input class="input-style" formControlName="horaI2" type="number" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+      </div>
+
+      <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+        <label class="input-text">Hora Final 2<span class="detalle"> (24hrs)</span></label>
+      </div>
+      <div class="col-2">
+        <input class="input-style" formControlName="horaF2" type="number" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+
+      </div>
+      <div class="col-12"><hr class="mid-mar"></div>
+      
+      
+    </form>
+  </div>
+
+</div>

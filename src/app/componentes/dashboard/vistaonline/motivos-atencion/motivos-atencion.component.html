@@ -1,0 +1,145 @@
+
+<div class="row colm" *ngFor="let row of servicios" style="background-color: white">
+  <div class="col-lg-2 col-xl-2 col-12 text-center font-dashboard bor-right">
+    <div class="con-tooltip right box-first">
+      <h6 class="big-grey blue-t lh">{{ row.nombre_servicio | truncarTexto : 19 }}</h6>
+      <div class="row">
+        <div class="col-lg-12 col-xl-12 col-6 text-center ">
+          <h5 class="big-grey green-t">
+            <i class="fas fa-user-circle "></i>{{ row.cantidad_clientes }}
+          </h5>
+          <p class="int">En Espera</p>
+        </div>
+        <div class="col-lg-12 col-xl-12 col-6 text-center ">
+          <h5 class="big-grey red-t">
+            <ng-template [ngIf]="row.tiempo_promedio != 'NaN:NaN'" [ngIfElse]="NaN">
+              <i class="far fa-pause-circle"></i>{{ row.tiempo_promedio }}
+            </ng-template>
+            <ng-template #NaN>
+              <i class="far fa-pause-circle"></i>0:00
+            </ng-template>
+          </h5>
+          <p class="int">Tiempo Espera</p>
+        </div>
+
+        <div class="tooltip mod-tol first">
+          <h6 class="big-grey">{{ row.nombre_servicio }}</h6>
+          <!-- <p class="blue-t">Emitidos: <span class="big-grey">null</span></p>
+          <p class="blue-t">Aten. Normal: <span class="big-grey">null</span></p>
+          <p class="blue-t">Abandonos: <span class="big-grey">null</span></p> -->
+          <p class="blue-t">
+            T. Espera Máx:
+            <ng-template [ngIf]="row.tiempo_maximo != 'NaN:NaN' && row.tiempo_maximo != '0-Infinity:NaN'"
+              [ngIfElse]="NaNDetalleEspera">
+              <span class="big-grey">{{ row.tiempo_maximo }}</span>
+            </ng-template>
+            <ng-template #NaNDetalleEspera>
+              <span class="big-grey">0:00</span>
+            </ng-template>
+          </p>
+          <p class="blue-t">
+            T. Med Aten.:
+            <ng-template [ngIf]="row.tiempo_promedio != 'NaN:NaN'" [ngIfElse]="NaNDetalleMaximo">
+              <span class="big-grey">{{ row.tiempo_promedio }}</span>
+            </ng-template>
+            <ng-template #NaNDetalleMaximo>
+              <span class="big-grey">0:00</span>
+            </ng-template>
+          </p>
+          <p class="blue-t">Alarma Espera: <span class="big-grey">{{ row.alarma_espera }}</span></p>
+          <p class="blue-t">Alarma Atención: <span class="big-grey">{{ row.alarma_atencion }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-xl-6 col-12 text-left font-dashboard bor-right space">
+    <h6 class="big-grey blue-t blue-co">Escritorios</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-md-4 col-xs-4 col-6 mt-1 pb-2" *ngFor="let row2 of row.escritorios">
+        <!-- <h5 [class]="(row2.estado == 'A' || row2.estado == 'E') ? 'big-grey green-t right pb-3' : 'big-grey red-t pb-3'"> -->
+        <h5 class="big-grey right pb-3" [ngClass]="{ 'green-t': row2.estado == 'A' || row2.estado == 'E', 'red-t': row2.estado == 'I', 'yellow-t': row2.estado == 'O' }" >
+          <i class="fas fa-user-circle"></i>
+          <span class="text-desktop">Escritorio {{ row2.id_escritorio }}</span>
+          <i class="fas fa-user green-t user-atencion" *ngIf="row2.estado == 'A' || row2.estado == 'E'"></i>
+          <div class="con-tooltip right">
+            <img class="rectangule" src="assets/img/icon-rectangle.svg">
+            <div class="tooltip ">
+              <h6 class="big-grey">Escritorio {{ row2.id_escritorio }}</h6>
+              <p class="blue-t">Ejecutivo:
+                <ng-template [ngIf]="row2.nombre_ejecutivo != ''" [ngIfElse]="sinEjecutivo">
+                  <span class="big-grey">{{ row2.nombre_ejecutivo }}</span>
+                </ng-template>
+                <ng-template #sinEjecutivo>
+                  <span class="big-grey">Sin ejecutivo</span>
+                </ng-template>
+              </p>
+              <p class="blue-t">Estado:
+                <ng-template [ngIf]="row2.estado == 'A'">
+                  <span class="big-grey">Atendiendo</span>
+                </ng-template>
+                <ng-template [ngIf]="row2.estado == 'E'">
+                  <span class="big-grey">En Espera</span>
+                </ng-template>
+                <ng-template [ngIf]="row2.estado == 'I'">
+                  <span class="big-grey">No Atendiendo</span>
+                </ng-template>
+                <ng-template [ngIf]="row2.estado == 'O'" #otroEstado>
+                  <span class="big-grey">En Pausa</span>
+                </ng-template>
+              </p>
+              <p class="blue-t plus">T. de Atención: <span class="big-grey">{{ row.nombre_servicio | truncarTexto : 40 }}</span></p>
+              <p class="blue-t">Turno:
+                <ng-template [ngIf]="row2.turno != 0" [ngIfElse]="turnoCliente">
+                  <span class="big-grey">{{ row2.turno }}</span>
+                </ng-template>
+                <ng-template #turnoCliente>
+                  <span class="big-grey">0</span>
+                </ng-template>
+              </p>
+              <p class="blue-t">Tiempo Promedio: <span class="big-grey">{{ row2.tiempo }}</span></p>
+              <p class="blue-t">Cantidad de Atención: <span class="big-grey">{{ row2.atendidos }}</span></p>
+            </div>
+          </div>
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-xl-4 col-12 text-left font-dashboard">
+    <h6 class="big-grey blue-t blue-co">Clientes en Espera</h6>
+    <div class="row">
+      <div class="col-2 die-m-t-l no-padding-1" *ngFor="let row2 of row.clientes; let i = index;">
+        <!--<div *ngIf="i<12">-->
+        <div>
+          <div class="con-tooltip bottom">
+            <a>
+              <!-- <img class="box-user" [src]="i > 3 ? 'assets/img/icon-circle-red.svg' : 'assets/img/icon-circle-green.svg'"> -->
+              <img class="box-user" src="assets/img/icon-circle-green.svg">
+              <div class="tooltip clientes">
+                <h5 class="big-grey">Cliente</h5>
+                <p *ngIf="row2.turno" class="blue-t cliente">Turno: <span class="big-grey">{{ row2.turno }}</span></p>
+                <p *ngIf="row2.hora" class="blue-t cliente">Hora emisión: <span class="big-grey">{{ row2.hora }}</span></p>
+                <p *ngIf="row.nombre_servicio" class="blue-t plus box-add">Servicio: <span
+                    class="big-grey">{{ row.nombre_servicio }}</span></p>
+                <p *ngIf="row2.tiempoEspera" class="blue-t cliente">Tº Espera: <span class="big-grey" [ngClass]="{'red-t': row2.tiempoEspera < 0}">{{ row2.tiempoEspera | convertirSegundosHora }}</span></p>
+                <p *ngIf="row2.rut" class="blue-t cliente">RUT: <span class="big-grey">{{ row2.rut }}</span></p>
+                <!--<p class="blue-t cliente">Fono: <span class="big-grey">null</span></p>-->
+                <p *ngIf="row2.nombre" class="blue-t cliente box-add">Nombre: <span class="big-grey">{{ row2.nombre }}</span>
+                </p>
+                <!--<p class="blue-t cliente">Visitas Anteriores: <span class="big-grey">null</span></p>-->
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="col-12 text-right blue-t big-2" *ngIf="row.cantidad_clientes > 12">
+        <a id="btn1" (click)="modal(row.clientes, row.nombre_servicio)"><i class="fas fa-plus-circle"></i></a>
+      </div>-->
+
+    </div>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

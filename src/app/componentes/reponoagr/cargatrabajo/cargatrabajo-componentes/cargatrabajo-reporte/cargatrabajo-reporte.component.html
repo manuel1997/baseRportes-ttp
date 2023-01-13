@@ -1,0 +1,136 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row mr-1 ml-1">
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <label class="input-text die-m-t">Entre Horas :
+            <span class="color-blue">{{ superior[2] }} Hrs. y {{ superior[3] }} Hrs.</span>
+          </label>
+        </div>
+        <div class="col-lg-4 col-xl-4 col-sm-12">
+          <label class="input-text die-m-t">Entre Días :
+            <span class="color-blue">{{ superior[0] }} al {{ superior[1] }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="11" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td rowspan="2" width="14%">Día</td>
+            <td rowspan="2">Turnos Emitidos</td>
+            <td colspan="4">Turnos Atendidos</td>
+            <!-- <td colspan="3">Turnos Atendidos</td> -->
+            <td rowspan="2">Turnos Perdidos</td>
+            <td rowspan="2">Turnos Perdidos TOL</td>
+            <td rowspan="2">Ejecutivos Activos</td>
+            <td rowspan="2">Espera Media</td>
+            <td rowspan="2">Delta Espera Media</td>
+          </tr>
+          <tr>
+            <td width="7%">Normal</td>
+            <td width="7%">TOL</td>
+            <td width="7%">Especial</td>
+            <td width="7%">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos">
+
+            <ng-template [ngIf]="dato.dia == 'SERIE'" [ngIfElse]="NoSerie">
+              <th [attr.colspan]="dato.dia == 'SERIE' ? 11 : ''">{{ dato.turnosemitidos }} {{ dato.tanormal }}</th>
+            </ng-template>
+            <ng-template #NoSerie>
+              <td>{{  dato.dia == 'TOT' ? 'Totales' : dato.dia }}</td>
+              <td>{{ dato.turnosemitidos }}</td>
+              <td>{{ dato.tanormal }}</td>
+              <td>{{ dato.tatol }}</td>
+              <td>{{ dato.taespecial }}</td>
+              <td>{{ dato.tatotal }}</td>
+              <td>{{ dato.tperdidos }}</td>
+              <td>{{ dato.tperdidostol }}</td>
+              <td>{{ dato.ejeactivos }}</td>
+              <td>{{ dato.esperamedia == 'NaN:NaN' ? '00:00' : dato.esperamedia }}</td>
+              <td>{{ dato.desperamedia == 'NaN:NaN' ? '00:00' : dato.desperamedia }}</td>
+            </ng-template>
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12"  style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Carga de Trabajo por Hora (No Agrupado)</h1>
+
+    <table width="80%" border='1'>
+      <tr>
+      <td width="20%" align="right"><b>Entre Días</b></td>
+      <td width="80%"><b>{{ superior[0] }} al {{ superior[1] }}</b></td>
+      </tr><tr>
+      <td align="right"><b>Entre Horas</b></td>
+      <td><b>{{ superior[2] }} Hrs. y {{ superior[3] }} Hrs.</b></td>
+      </tr>
+    </table>
+    <br>
+
+    <table width="80%" border='1'>
+      <tr align="center">
+      <td rowspan="2" width="16%"><b>Dia</b></td>
+      <td rowspan="2" width="12%"><b>Turnos<br>Emitidos</b></td>
+      <td colspan="4" width="36%"><b>Turnos Atendidos</b></td>
+      <!-- <td colspan="3" width="36%"><b>Turnos Atendidos</b></td> -->
+      <td rowspan="2" width="12%"><b>Turnos<br>Perdidos</b></td>
+      <td rowspan="2" width="12%"><b>Turnos<br>Perdidos TOL</b></td>
+      <td rowspan="2" width="12%"><b>Ejecutivos<br>Activos</b></td>
+      <td rowspan="2" width="12%"><b>Espera<br>Media</b></td>
+      <td rowspan="2" width="12%"><b>Delta<br>Espera<br>Media</b></td>
+      </tr><tr align="center">
+      <td width="12%"><b>Normal</b></td>
+      <td width="12%"><b>TOL</b></td>
+      <td width="12%"><b>Especial</b></td>
+      <td width="12%"><b>Total</b></td>
+      </tr>
+      <tr *ngFor="let dato of datos">
+        <ng-template [ngIf]="dato.dia == 'SERIE'" [ngIfElse]="NoSerie">
+          <th [attr.colspan]="dato.dia == 'SERIE' ? 11 : ''">{{ dato.turnosemitidos }} {{ dato.tanormal }}</th>
+        </ng-template>
+        <ng-template #NoSerie>
+          <td>{{ dato.dia == 'TOT' ? 'Totales' : dato.dia }}</td>
+          <td>{{ dato.turnosemitidos }}</td>
+          <td>{{ dato.tanormal }}</td>
+          <td>{{ dato.tatol }}</td>
+          <td>{{ dato.taespecial }}</td>
+          <td>{{ dato.tatotal }}</td>
+          <td>{{ dato.tperdidos }}</td>
+          <td>{{ dato.tperdidostol }}</td>
+          <td>{{ dato.ejeactivos }}</td>
+          <td>{{ dato.esperamedia }}</td>
+          <td>{{ dato.desperamedia }}</td>
+        </ng-template>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

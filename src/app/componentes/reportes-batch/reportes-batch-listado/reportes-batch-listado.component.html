@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <div id="content">
+    <div class="container-fluid">
+      <div class="tittle-inside"><span>Reporte DWH</span></div>
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+        <div class="col-12">
+          <table class="t-products">
+            <colgroup>
+              <col span="35" style="border-left: 1px solid #e7e7e7;">
+            </colgroup>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Reporte</td>
+                <td>Fecha</td>
+                <td>Hora</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of listado">
+                <td>
+                  <ng-container *ngIf="row.link === 'S'">
+                    <a href="{{ ruta }}/batch/{{ row.nombre }}"><i class="fas fa-file-export"></i></a>
+                  </ng-container>
+                </td>
+                <td>{{ row.nombre }}</td>
+                <td>{{ row.fecha }}</td>
+                <td>{{ row.hora }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

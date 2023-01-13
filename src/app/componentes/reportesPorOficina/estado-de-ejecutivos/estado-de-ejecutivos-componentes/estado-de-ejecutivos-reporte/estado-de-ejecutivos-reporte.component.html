@@ -1,0 +1,111 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+      <button type="button" class="blue-bottom" role="link" (click)="volver()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-lg-12 col-12 col-md-6 col-sm-6">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="big-grey">
+            <i class="fas fa-building"></i>
+            {{ oficina }}
+          </h3>
+        </div>
+       
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12">
+                <i class="fas fa-clock blue-icon"></i>
+          <label class="input-text">Fechas:</label>
+          <label class="input-text ml-1"> {{ dia }}</label>
+        </div>
+
+        <div class="col-12">
+            <i class="fas fa-clock blue-icon"></i>
+          <label class="input-text">Entre Horas:</label>
+          <label class="input-text ml-1"> {{ entreHoras }}</label>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-12 col-md-6 col-sm-6">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="10" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td>Ejecutivo</td>
+            <td *ngFor="let row of tiempo">
+              {{ row }}
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows_ejecutivos; let i=index">
+            <td>{{ row.detalle }}</td>
+            <td style="border:2px black solid" scope="col" *ngFor="let accion of rows_acciones[i]" [style.background-color]="accion.tipo">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+
+<!--
+<div class="row">
+  <div class="col-lg-3">
+    <p>Oficina</p>
+    <p>Día</p>
+    <p>Entre horas</p>
+  </div>
+  <div class="col-lg-4">
+    <p> {{ oficina }} </p>
+    <p> {{ dia }} </p>
+    <p> {{ entreHoras }} </p>
+  </div>
+  <div class="col-lg-2">
+    <div class="p-3 mb-2 bg-light">  </div>
+    <div class="p-3 mb-2 bg-danger">  </div>
+    <div class="p-3 mb-2 bg-success">  </div>
+  </div>
+  <div class="col-lg-2">
+    <p>Apagado</p>
+    <p>Pausa</p>
+    <p>Activo</p>
+  </div>
+  <div class="col-lg-1">
+    <button type="button" class="btn btn-primary" (click)="volver()">Volver</button>
+  </div>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Ejecutivo</th>
+      <th scope="col" *ngFor="let row of tiempo">
+        {{ row }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows_ejecutivos; let i=index">
+      <td>{{ row.detalle }}</td>
+      <td style="border:2px black solid" scope="col" *ngFor="let accion of rows_acciones[i]" [style.background-color]="accion.tipo">
+      </td>
+    </tr>
+  </tbody>
+</table>
+-->
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

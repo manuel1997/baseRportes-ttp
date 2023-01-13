@@ -1,0 +1,43 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="volver()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+
+  </div>
+  <div class="col-12">
+  <div class="content-white">
+  <div class="row">
+
+     
+      <div class="col-lg-3 text-center">
+        <p><strong>{{ titulo }} - {{ serieDetalle }}</strong></p>
+        <p>{{ rangoFecha }}</p>
+        <table class="products">
+          <thead>
+            <tr>
+              <td scope="col">#</td>
+              <td scope="col">Motivo</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of rows_agrupacionesReportes">
+              <td>{{ row.id }}</td>
+              <td>{{ row.detalle }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-9 text-center" id="contenedorChart">
+        <canvas #lineChart>{{ chart }}</canvas>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

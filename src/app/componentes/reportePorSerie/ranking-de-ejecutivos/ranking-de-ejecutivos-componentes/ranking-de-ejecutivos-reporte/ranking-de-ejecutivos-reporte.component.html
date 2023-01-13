@@ -1,0 +1,75 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-lg-12 col-12 col-md-6 col-sm-6">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="text-center big-grey">
+            <i class="fas fa-building"></i>
+            {{ superior[0] }}
+          </h3>
+        </div>
+
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12">
+              <label class="input-text">
+                <i class="fas fa-clock blue-icon"></i>
+                Serie :{{ superior[1] }}
+              </label>
+            </div>
+            <div class="col-12">
+            <label class="input-text">
+              <i class="fas fa-clock blue-icon"></i>
+              Rango de Fechas : {{ superior[2] }} al {{ superior[3] }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <div class="content-white no-padding">
+    <table class="t-products">
+      <colgroup>
+        <col span="35" style="border-left: 1px solid #e7e7e7;">
+      </colgroup>
+      <thead>
+        <tr>
+          <td>Ranking</td>
+          <td>Ejecutivo</td>
+          <td>Atenciones</td>
+          <td>Tpo Medio</td>
+          <td>% On/Off</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dato of datos; let i = index">
+          <ng-template [ngIf]="i+1 == datos.length" [ngIfElse]="Ultima">
+            <th>{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</th>
+            <td></td>
+            <th>{{ dato.ate }}</th>
+          </ng-template>
+          <ng-template #Ultima>
+            <td>{{ dato.rank }}</td>
+            <td>{{ dato.ejecutivo == 'TOT' ? 'Totales' : dato.ejecutivo }}</td>
+            <td>{{ dato.ate }}</td>
+            <td>{{ dato.tpo_m }}</td>
+            <td>{{ dato.on_off }}</td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

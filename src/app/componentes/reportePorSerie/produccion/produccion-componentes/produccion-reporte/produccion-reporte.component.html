@@ -1,0 +1,260 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="text-center big-grey">
+            <i class="fas fa-building"></i>{{ superior[0] }}
+          </h3>
+        </div>
+      
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12">
+          <label class="input-text">
+              <i class="fas fa-clock blue-icon"></i> Serie : {{ superior[1] }}
+          </label>
+        </div>
+        <div class="col-12">
+          <label class="input-text">
+              <i class="fas fa-clock blue-icon"></i> Mes : {{ superior[2] }}
+          </label>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="35" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td scope="col">{{ this.agr_col }}</td>
+            <td scope="col"></td>
+            <td scope="col" *ngFor="let periodo of this.per_col">
+              {{ periodo }}
+            </td>
+            <td scope="col">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container [ngSwitch]="this.periodo">
+            <ng-container  *ngSwitchCase="'D'">
+              <tr *ngFor="let dato of datos; let i = index">
+                <td>
+                  {{ dato.eje }}
+                </td>
+                <td>
+                  {{ dato.normal }}
+                </td>
+                <td>
+                  {{ dato.ocho }}
+                </td>
+                <td>
+                  {{ dato.nueve }}
+                </td>
+                <td>
+                  {{ dato.diez }}
+                </td>
+                <td>
+                  {{ dato.once }}
+                </td>
+                <td>
+                  {{ dato.doce }}
+                </td>
+                <td>
+                  {{ dato.trece }}
+                </td>
+                <td>
+                  {{ dato.catorce }}
+                </td>
+                <td>
+                  {{ dato.quince }}
+                </td>
+                <td>
+                  {{ dato.dieciseis }}
+                </td>
+                <td>
+                  {{ dato.diecisiete }}
+                </td>
+                <td>
+                  {{ dato.dieciocho }}
+                </td>
+                <td>
+                  {{ dato.diecinueve }}
+                </td>
+                <td>
+                  {{ dato.veinte }}
+                </td>
+                <td>
+                  {{ dato.veintiuno }}
+                </td>
+                <td>
+                  {{ dato.veintidos }}
+                </td>
+                <td>
+                  {{ dato.Total }}
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container  *ngSwitchCase="'S'">
+              <tr *ngFor="let dato of datos; let i = index">
+                <td>
+                  {{ dato.eje }}
+                </td>
+                <td>
+                  {{ dato.normal }}
+                </td>
+                <td>
+                  {{ dato.Lun }}
+                </td>
+                <td>
+                  {{ dato.Mar }}
+                </td>
+                <td>
+                  {{ dato.Mie }}
+                </td>
+                <td>
+                  {{ dato.Jue }}
+                </td>
+                <td>
+                  {{ dato.Vie }}
+                </td>
+                <td>
+                  {{ dato.Sab }}
+                </td>
+                <td>
+                  {{ dato.Dom }}
+                </td>
+                <td>
+                  {{ dato.Total }}
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container  *ngSwitchCase="'M'">
+              <tr *ngFor="let dato of datos; let i = index">
+                <td>
+                  {{ dato.eje }}
+                </td>
+                <td>
+                  {{ dato.normal }}
+                </td>
+                <td>
+                  {{ dato.dia1 }}
+                </td>
+                <td>
+                  {{ dato.dia2 }}
+                </td>
+                <td>
+                  {{ dato.dia3 }}
+                </td>
+                <td>
+                  {{ dato.dia4 }}
+                </td>
+                <td>
+                  {{ dato.dia5 }}
+                </td>
+                <td>
+                  {{ dato.dia6 }}
+                </td>
+                <td>
+                  {{ dato.dia7 }}
+                </td>
+                <td>
+                  {{ dato.dia8 }}
+                </td>
+                <td>
+                  {{ dato.dia9 }}
+                </td>
+                <td>
+                  {{ dato.dia10 }}
+                </td>
+                <td>
+                  {{ dato.dia11 }}
+                </td>
+                <td>
+                  {{ dato.dia12 }}
+                </td>
+                <td>
+                  {{ dato.dia13 }}
+                </td>
+                <td>
+                  {{ dato.dia14 }}
+                </td>
+                <td>
+                  {{ dato.dia15 }}
+                </td>
+                <td>
+                  {{ dato.dia16 }}
+                </td>
+                <td>
+                  {{ dato.dia17 }}
+                </td>
+                <td>
+                  {{ dato.dia18 }}
+                </td>
+                <td>
+                  {{ dato.dia19 }}
+                </td>
+                <td>
+                  {{ dato.dia20 }}
+                </td>
+                <td>
+                  {{ dato.dia21 }}
+                </td>
+                <td>
+                  {{ dato.dia22 }}
+                </td>
+                <td>
+                  {{ dato.dia23 }}
+                </td>
+                <td>
+                  {{ dato.dia24 }}
+                </td>
+                <td>
+                  {{ dato.dia25 }}
+                </td>
+                <td>
+                  {{ dato.dia26 }}
+                </td>
+                <td>
+                  {{ dato.dia27 }}
+                </td>
+                <td>
+                  {{ dato.dia28 }}
+                </td>
+                <td>
+                  {{ dato.dia29 }}
+                </td>
+                <td>
+                  {{ dato.dia30 }}
+                </td>
+                <td>
+                  {{ dato.dia31 }}
+                </td>
+                <td>
+                  {{ dato.Total }}
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

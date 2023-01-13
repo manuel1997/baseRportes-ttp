@@ -1,0 +1,39 @@
+<div class="title-grey">
+  <i class="fas fa-building"></i> Oficinas
+</div>
+<table class="t-products">
+  <colgroup>
+    <col span="5" style="border-left: 1px solid #e7e7e7;">
+  </colgroup>
+  <thead>
+    <tr>
+      <td width="8%">&nbsp;<i class="fas fa-hashtag"></i>&nbsp;</td>
+      <td><i class="fas fa-building"></i> Oficina</td>
+      <td width="8%">
+        &nbsp;<input type="checkbox" name="seleccionarTodasLasOficinas" [(ngModel)]="oficinasTodasSeleccionadas" (change)="seleccionarTodasLasOficinas()">&nbsp;
+      </td>
+      <td width="18%">Fecha Min</td>
+      <td width="20%">Fecha Max</td>
+    </tr>
+  </thead>
+</table>
+<div class="content-white no-padding">
+ 
+  <table class="t-products">
+    <colgroup>
+      <col span="5" style="border-left: 1px solid #e7e7e7;">
+    </colgroup>
+    
+    <tbody>
+      <tr *ngFor="let oficina of oficinas">
+        <th width="8%" scope="row">{{ oficina.id }}</th>
+        <td>{{ oficina.oficina }}</td>
+        <td width="9%">
+          <input type="checkbox" [(ngModel)]="oficina.check" (checked)="checKSeleccionarOficinas()" (change)="marcar($event)">
+        </td>
+        <td width="18%">{{ oficina.fechamin }}</td>
+        <td width="18%">{{ oficina.fechamax }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> <!--(change)="marcar($event, oficina)"-->

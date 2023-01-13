@@ -1,0 +1,144 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+      <button type="button" class="btn btn-form" role="link" (click)="atras()">
+        <i class="fas fa-arrow-left"></i> Volver
+      </button>
+      <!--<button type="button" class="btn btn-form btn-green" (click)="generarExcel()" title="Exportar en Excel">
+        <i class="far fa-file-excel"></i>
+      </button>-->
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+
+      <div class="row">
+        <div class="col-lg-4 col-xl-4 col-sm-12"  data-toggle="tooltip" title="{{ superior[0] }}">
+          <h5 class="big-grey"><i class="fas fa-building"></i>{{ superior[0] | truncarTexto : 80 }}</h5>
+        </div>
+        <div class="col-lg-5 col-xl-5 col-sm-12">
+          <label class="input-text">Rango de Fechas :
+            <span class="color-blue">{{ superior[1] }} al {{ superior[2] }}</span>
+          </label>
+          <hr>
+          <label class="input-text">Rango de Horas :
+            <span class="color-blue">{{ superior[3] }} Hrs. a {{ superior[4] }} Hrs.</span>
+          </label>
+          <hr>
+          <!--<label class="input-text">Filtrar por Rango :
+            <input class="input-style float-right ses-p">
+          </label>
+          <button class="blue-bottom-small float-right">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+          </button>-->
+        </div>
+        <div class="col-lg-3 col-xl-3 col-sm-12">
+          <label class="input-text">Intervalo {{ superior[5] }} (min)</label>
+          <label class="input-text">Límite Superior {{ superior[6] }} (min)</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="11" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td colspan="1">Rango Atención</td>
+            <td colspan="5">Clientes Atendidos</td>
+            <!-- <td colspan="4">Clientes Atendidos</td> -->
+            <td colspan="2">Acumulado</td>
+            <td colspan="1">Atención</td>
+          </tr>
+          <tr>
+            <td>[min]</td>
+            <td>Normal</td>
+            <td>TOL</td>
+            <td>Especial</td>
+            <td>Total</td>
+            <td>%</td>
+            <td width="50" >Numero</td>
+            <td width="50">%</td>
+            <td>Prom. Acum.</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos">
+            <td>{{ dato.min == 'TOT' ? 'Totales' : dato.min }}</td>
+            <td>{{ dato.normal }}</td>
+            <td>{{ dato.tol }}</td>
+            <td>{{ dato.especial }}</td>
+            <td>{{ dato.total }}</td>
+            <td>{{ dato.porcentaje1 }}</td>
+            <td>{{ dato.n }}</td>
+            <td>{{ dato.porcentaje2 }}</td>
+            <td align="center">{{ dato.promedio }}</td>
+          </tr>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" style="display:none;" id="divExcel">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <h1>Resumen de Atencion (Agrupado)</h1>
+    <table width="80%" border='1'>
+      <tr valign="top">
+      <td bgcolor='rgb(153,204,255)' align="right"><b>Oficina</b></td>
+      <td colspan="4"><b>{{ superior[0] }}</b></td>
+      </tr><tr>
+      <td bgcolor='rgb(153,204,255)' width="20%" align="right"><b>Rango de Fechas</b></td>
+      <td width="40%"><b>{{ superior[1] }} al {{ superior[2] }}</b></td>
+      <td bgcolor='rgb(153,204,255)' width="20%" align="right"><b>Intervalo</b></td>
+      <td width="20%"><b>{{ superior[5] }} [min]</b></td>
+      </tr><tr>
+      <td bgcolor='rgb(153,204,255)' align="right"><b>Rango de Horas</b></td>
+      <td><b>{{ superior[3] }} Hrs. a {{ superior[4] }} Hrs.</b></td>
+      <td bgcolor='rgb(153,204,255)' align="right"><b>Limite Superior</b></td>
+      <td><b>{{ superior[6] }} [min]</b></td>
+      </tr>
+    </table>
+    <br>
+    <table width="80%" border='1'>
+      <tr align="center">
+        <td bgcolor='rgb(153,204,255)'><b>Rango Atencion</b></td>
+        <td bgcolor='rgb(153,204,255)' colspan="5"><b>Clientes Atendidos</b></td>
+        <!-- <td bgcolor='rgb(153,204,255)' colspan="4"><b>Clientes Atendidos</b></td> -->
+        <td bgcolor='rgb(153,204,255)' colspan="2"><b>Acumulado</b></td>
+        <td bgcolor='rgb(153,204,255)' colspan="1"><b>Atención</b></td>
+      </tr>
+      <tr align="right">
+        <td bgcolor='rgb(153,204,255)' align="center"><b>[ min ]</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>Normal</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>TOL</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>Especial</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>Total</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>%</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>Número</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>%</b></td>
+        <td bgcolor='rgb(153,204,255)'><b>Prom Acum</b></td>
+      </tr>
+      <tr align="right" *ngFor="let dato of datos; let i = index">
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''" align="center">{{ dato.min == 'TOT' ? 'Totales' : dato.min }}</td>
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''">{{ dato.normal }}</td>
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''">{{ dato.tol }}</td>
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''">{{ dato.especial }}</td>
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''">{{ dato.total }}</td>
+        <td>{{ dato.porcentaje1 }}</td>
+        <td [attr.bgcolor]="i == datos.length ? 'rgb(153,204,255)' : ''">{{ dato.n }}</td>
+        <td>{{ dato.porcentaje2 }}</td>
+        <td align="right">{{ dato.promedio }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

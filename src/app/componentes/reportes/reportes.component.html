@@ -1,0 +1,295 @@
+<app-navbar></app-navbar>
+
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+      <div class="tittle-inside"><span>Reportes</span></div>
+      <div class="arrow-right"></div>
+
+        <div class="row row-explorer  font-dashboard">
+
+          <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+            <div class="title-grey">
+              <i class="far fa-copy"></i> Reportes Batch
+            </div>
+            <div class="content-white  pb-0">
+              <div class="row">
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/reportesBatchListado']"> Revisar archivos batch</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+                <div class="col-12">
+                  <hr class="mid-mar">
+                </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/reportesBatch']"> Reporte DWH</a>
+                </div>
+                <div class="col-1" >
+          <p style="color: #005C8B;"><i class="far fa-list-alt" title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+              </div>
+            </div>
+            <div class="title-grey">
+              <i class="far fa-copy"></i> Reportes Globales Agrupados
+            </div>
+            <div class="content-white  pb-0">
+              <div class="row">
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/repAgrResumenEspera']"> Resumen de Espera</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+                <div class="col-12">
+                  <hr class="mid-mar">
+                </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/repAgrResumenAtencion']"> Resumen de Atención</a>
+                </div>
+                <div class="col-1" >
+         <p style="color: #005C8B;"><i class="far fa-list-alt" title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+              </div>
+            </div>
+
+            <div class="title-grey"><i class="fas fa-file"></i> Reportes Globales No Agrupados</div>
+              <div class="content-white pb-0">
+                <div class="row">
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrRangoEspera']">Rango de Espera</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                  </div>
+                  <div class="col-auto"></div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrRangoAtencion']">Rango de Atención</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                  </div>
+                  <div class="col-auto"></div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrTendenciAtencion']">Tendencia de Atenciones</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i></p>
+                  </div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrCargaTrabajo']">Carga de Trabajo por Hora</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                  </div>
+                  <div class="col-auto"></div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrResumenEspera']">Resumen de Espera</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="fas fa-chart-line" title="Reporte Gráfico Disponible"></i> </p>
+                  </div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrResumenAtencion']">Resumen de Atención</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i> </p>
+                  </div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrResumenMensual']">Resumen Mensual</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt" title="Reporte Disponible"></i></p>
+                  </div>
+                  <div class="col-auto"></div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrRankingAtenciones']">Ranking de Atenciones</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt" title="Reporte Disponible"></i></p>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><a href="#"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i></a> </p>
+                  </div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/repnoagrResumenTOL']">Resumen TOL</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                  </div>
+                  <div class="col-auto"></div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+
+              <div class="title-grey"><i class="fas fa-building"></i> Reportes por Oficina</div>
+              <div class="content-white pb-0">
+                <div class="row">
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/motivosDePausa']">Motivos de Pausa</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i></p>
+                  </div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/resumenDeEjecutivo']">Resumen de Ejecutivo</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                  </div>
+
+                  <div class="col-auto"></div>
+                  <div class="col-12">
+                      <hr class="mid-mar">
+                    </div>
+                  <div class="col-9">
+                    <i class="fas fa-caret-right blue-icon "></i>
+                    <a [routerLink]="['/estadoDeEjecutivos']">Estado Diario de Ejecutivo</a>
+                  </div>
+                  <div class="col-1">
+                    <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                  </div>
+
+                  <div class="col-auto"></div>
+
+                  </div>
+              </div>
+
+              <div class="title-grey">
+                <i class="fas fa-file-invoice"></i>
+                <a href="#"> Reportes Por Serie</a>
+              </div>
+              <div class="content-white pb-0">
+              <div class="row">
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/reportePorSerieproduccion']">Producción</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+                <div class="col-12">
+                    <hr class="mid-mar">
+                  </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/reportePorSerierankingDeEjecutivos']">Ranking de Ejecutivos</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-auto"></div>
+                <div class="col-12">
+                    <hr class="mid-mar">
+                  </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/cargaDeTrabajoDiaria']">Carga de Trabajo Diaria</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i></p>
+                </div>
+                <div class="col-12">
+                    <hr class="mid-mar">
+                  </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/resumenDeOficina']">Resumen de Oficina</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i> </p>
+                </div>
+
+                <div class="col-auto"></div>
+                <div class="col-12">
+                    <hr class="mid-mar">
+                  </div>
+                <div class="col-9">
+                  <i class="fas fa-caret-right blue-icon "></i>
+                  <a [routerLink]="['/motivosDeAtencion']">Motivos de Atención</a>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="far fa-list-alt"  title="Reporte Disponible"></i></p>
+                </div>
+                <div class="col-1">
+                  <p style="color: #005C8B;"><i class="fas fa-chart-line"  title="Reporte Gráfico Disponible"></i></p>
+                </div>
+
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

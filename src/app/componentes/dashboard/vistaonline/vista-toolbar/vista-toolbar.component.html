@@ -1,0 +1,146 @@
+<ng-container class="row row-explorer" *ngIf="rows.length === 0">
+  <div class="col-12">
+    <div class="content-white no-padding alert-danger w-100"  style="overflow: hidden">
+      <h5 class="big-grey blue-c die-m-t ">
+        <i class="fas fa-cube"></i>
+        <p class="font-dashboard fail">
+          No hay registros disponibles y/o en este momento no hay oficinas en línea.
+        </p>
+      </h5>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="rows.length > 0">
+  <div class="row">
+    <div class="col-lg-4 col-xl-4 col-sm-12 col-md-12 col-12 text-left  bor-right">
+      <div class="row">
+        <div class="col-1">
+          <h6 class="big-grey blue-t mt-2"><i class="far fa-building"></i></h6>
+        </div>
+        <div class="col-10">
+          <h6 class="big-grey">
+            <select class="input-style no-padding" [(ngModel)]="iOficinaSeleccionada.id_oficina"
+              [ngModelOptions]="{standalone: true}" (change)="selectOficina(iOficinaSeleccionada.id_oficina)">
+              <option value="" disabled selected>Seleccione</option>
+              <option *ngFor="let row of rows" value="{{ row.id_oficina }}"
+                [selected]="iOficinaSeleccionada.id_oficina == row.id_oficina">{{ row.nombre_oficina }}</option>
+            </select>
+          </h6>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-xl-4 col-sm-12 col-md-9 col-12 text-left  bor-right">
+      <div class="row">
+        <div class="col-1 ">
+          <h6 class="big-grey blue-t mt-2 "><i class="far fa-clock"></i></h6>
+        </div>
+        <div class="col-7">
+          <h6 class="big-grey mt-2">Intervalo de Refresco</h6>
+        </div>
+
+        <div class="col-lg-3 col-xl-3 col-sm-5 col-md-6 col-3">
+          <select class="input-style no-padding float-left" [(ngModel)]="intervalo" (change)="refrescarDatos()">
+            <option [value]="60000">1 min</option>
+            <option [value]="180000">3 min</option>
+            <option [value]="300000">5 min</option>
+            <option [value]="420000">7 min</option>
+            <option [value]="600000">10 min</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xl-4 col-12 col-md-6 text-left">
+      <div class="row  mt-2">
+        <div class="col-4 pr-0">
+          <h6 class="big-grey">
+            <i class="fas fa-check-circle green-t"></i>&nbsp; {{ iSucursalDetalles.estado_oficina }}
+          </h6>
+        </div>
+        <div class="col-8">
+          <h6 class="big-grey">
+            <i class="far fa-clock blue-t"></i>&nbsp; {{ iSucursalDetalles.hora_servidor }} Hora Servidor
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+    <div class="col-2">
+      <h6 class="big-grey blue-t">Estado de atención: </h6>
+    </div>
+    <div class="col-3">
+      <h6 class="big-grey"><i class="fas fa-user red-t"></i> Inactivo / No Atendiendo</h6>
+    </div>
+    <div class="col-2">
+      <h6 class="big-grey">
+
+        <i class="fas fa-user yellow-t"></i> Pausa
+      </h6>
+    </div>
+    <div class="col-2">
+      <h6 class="big-grey">
+        <i class="fas fa-user green-t"></i> Activo / Atendiendo</h6>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <hr class="mid-mar">
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-xs-4 col-6 pr-0 pb-4" *ngFor="let row2 of escritorios">
+      <div class="row">
+        <div class="col-5 pr-1">
+          <h5>
+            <ng-template [ngIf]="row2.estado == 'A' || row2.estado == 'E'">
+              <i class="fas fa-user green-t user-atencion"></i>
+            </ng-template>
+
+            <ng-template [ngIf]="row2.estado == 'I'">
+              <i class="fas fa-user red-t user-atencion"></i>
+            </ng-template>
+
+            <ng-template [ngIf]="row2.estado == 'O'">
+              <i class="fas fa-user yellow-t user-atencion"></i>
+            </ng-template>
+
+            <div class="con-tooltip right mb-3">
+              <img class="rectangule" src="assets/img/icon-rectangle.svg">
+            </div>
+          </h5>
+        </div>
+        <div class="col-7 pl-2">
+          <!--pl-0-->
+          <h6 class="big-grey blue-t">Escritorio {{ row2.id }}</h6>
+          <a href="#serv_{{ row2.id }}" class="big-grey" data-toggle="collapse" data-target="#serv_{{ row2.id }}">
+            <h6 class="big-grey">Ver más <i class="fas fa-plus blue-t"></i></h6>
+          </a>
+          <ul class="desktop-detail collapse" id="serv_{{ row2.id }}">
+            <div *ngFor="let servicio of row2.id_servicio">
+              <ng-template [ngIf]="servicio.estado == 'A' || servicio.estado == 'E'">
+                <li class="green"><i class="fas fa-check-circle blue-t"></i> {{ servicio.nombre_servicio }}</li>
+              </ng-template>
+              <ng-template [ngIf]="servicio.estado == 'I'">
+                <span class="big-grey"><i class="far fa-stop-circle red-t"></i> {{ servicio.nombre_servicio }}</span>
+              </ng-template>
+              <ng-template [ngIf]="servicio.estado == 'O'" #otroEstado>
+                <span class="big-grey"><i class="fas fa-pause-circle yellow-t"></i> {{ servicio.nombre_servicio}}</span>
+              </ng-template>
+            </div>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+  </div>
+
+</ng-container>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

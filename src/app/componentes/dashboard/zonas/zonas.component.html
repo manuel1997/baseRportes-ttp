@@ -1,0 +1,463 @@
+<div id="loader" [ngClass]="{'loader': loading}"></div>
+<ng-container *ngIf="errorSinDatos">
+  <div class="content-white no-padding alert-danger ">
+    <div class="title-grey">
+      <h3 class="big-grey text-white ">Error</h3>
+    </div>
+
+    <h5 class="big-grey blue-c die-m-t "><i class="fas fa-cube"></i>
+      <p class="font-dashboard fail">
+        No hay zonas disponibles y/o en este momento no hay oficinas en línea.
+      </p>
+    </h5>
+
+    <button class="btn btn-form" (click)="volver()">Volver <i class="fas fa-undo-alt"></i></button>
+  </div>
+</ng-container>
+
+
+<div class="row row-explorer" *ngIf="!errorSinDatos" [hidden]="!mostrarDashboard">
+
+  <div class="col-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Parámetros del Reporte</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-lg-5 col-xl-5 col-sm-6 col-md-6 col-12 text-left">
+          <!-- <div class="col-lg-6 col-xl-6 col-sm-6 col-md-6 col-12 text-left"> -->
+          <div class="row">
+            <div class="col-lg-1 col-xl-1 col-0"></div>
+            <div class="col-2">
+              <h5 class="big-grey blue-t text-left"><i class="far fa-clock"></i></h5>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-5"><span class="big-grey "> Intervalo de
+                Refresco</span></div>
+            <div class="col-lg-3 col-xl-3 col-sm-4 col-md-4 col-3"><select [(ngModel)]="intervalo"
+                (change)="refrescarDatos()" class="input-style no-padding">
+                <option [value]="60000">1 min</option>
+                <option [value]="180000">3 min</option>
+                <option [value]="300000">5 min</option>
+                <option [value]="420000">7 min</option>
+                <option [value]="600000">10 min</option>
+              </select></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="accordion">
+          <div *ngFor="let zonaActual of zonasAgrupadas; let i = index;">
+            <div class="card-header" id="headingOne">
+              <div class="row">
+
+                <div class="col-10">
+                  <h5 class="mb-0">
+                    <button class="btn-link big-grey" data-toggle="collapse"
+                      [attr.data-target]="'#collapseOne_' + zonaActual.id_zona" aria-expanded="true"
+                      aria-controls="collapseOne" (click)="guardarZona(zonaActual.id_zona)">
+                      <i class="fas fa-chevron-circle-down"></i> {{ zonaActual.nombre_zona }}
+                    </button></h5>
+                </div>
+                <div class="col-2">
+                  <!-- <a [routerLink]="['/oficinasReportes']" class="sucursal"
+                    (click)="guardarZona(zonaActual.id_zona)">
+                    <i class="fas fa-bars"></i> Ver Sucursales
+                  </a> -->
+                  <button class="btn-link big-grey" (click)="emitirZona(zonaActual.id_zona)">
+                    <i class="fas fa-bars"></i> Ver Sucursales
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div [attr.id]="'collapseOne_' + zonaActual.id_zona" class="collapse" aria-labelledby="headingOne"
+              data-parent="#accordion" [ngClass]="{ 'show': zonaActual.id_zona == id_zonaLocalStorage }">
+              <div class="card-body ">
+                <div class="row content-white">
+                  <div class="row">
+                    <div class="col-xl-2 col-lg-3 pl-0 pr-0">
+                      <div class="text-center font-dashboard">
+                        <h5 class="blue-t">Turnos</h5>
+                        <br>
+                        <div class="row">
+
+                          <div class="col-6 text-right">
+                            <h5 class="big-grey green-t"><i class="fas fa-user-circle"></i></h5>
+                          </div>
+                          <br>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.turnos_emitidos }}
+                            </h5>
+                          </div>
+                          <div class="col-12">Emitidos</div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                        'red-t': zonaActual?.clientes_espera > 9,
+                        'yellow-t': zonaActual?.clientes_espera >= 5 && zonaActual?.clientes_espera <= 9,
+                        'green-t': zonaActual?.clientes_espera < 5
+                        }" class="big-grey"><i class="fas fa-users"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.clientes_espera }}</h5>
+                          </div>
+                          <div class="col-12">
+                            Clientes en Espera</div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                        'red-t': zonaActual?.clientes_perdidos > 9,
+                        'yellow-t': zonaActual?.clientes_perdidos >= 5 && zonaActual?.clientes_perdidos <= 9,
+                        'green-t': zonaActual?.clientes_perdidos < 5
+                        }" class="big-grey"><i class="fas fa-bolt"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.clientes_perdidos }}</h5>
+                          </div>
+                          <div class="col-12">
+                            Perdidos</div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 pl-0 pr-0">
+                      <div class="text-center font-dashboard">
+                        <h5 class="blue-t">Clientes atendidos</h5>
+                        <br>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 class="big-grey green-t"><i class="far fa-user-circle"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.normales }}
+                            </h5>
+                          </div>
+                          <div class="col-12"> Normal</div>
+
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 class="big-grey blue-t"><i class="fas fa-star"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.especiales }}
+                            </h5>
+                          </div>
+                          <div class="col-12"> Especial</div>
+
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 class="big-grey green-t"><i class="fas fa-user-circle"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.totales }}
+                            </h5>
+                          </div>
+                          <div class="col-12"> Total Atendidos</div>
+                        </div>
+
+                      </div>
+
+                      <!-- <div class="text-center font-dashboard bor-right">
+                        <h5 class="blue-t">Dotación sucursales</h5>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 class="big-grey green-t"><i class="fas fa-user-circle"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.dotacion_sucursales }}
+                            </h5>
+                          </div>
+                          <div class="col-12"> Ejecutivos en sucursal</div>
+
+                        </div>
+                        <hr>
+                      </div> -->
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 pl-0 pr-0">
+                      <div class="text-center font-dashboard ">
+                        <h5 class="blue-t">Estados</h5>
+                        <br>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                          'red-t': zonaActual?.asistentes_atendiendo < 3,
+                          'yellow-t': zonaActual?.asistentes_atendiendo >= 3 && zonaActual?.asistentes_atendiendo <= 5,
+                          'green-t': zonaActual?.asistentes_atendiendo > 5
+                          }" class="big-grey"><i class="fas fa-star"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.asistentes_atendiendo }}</h5>
+                          </div>
+                          <div class="col-12">Activos</div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                        'red-t': zonaActual?.asistentes_en_pausas > 2,
+                        'yellow-t': zonaActual?.asistentes_en_pausas >= 1 && zonaActual?.asistentes_en_pausas <= 2,
+                        'green-t': zonaActual?.asistentes_en_pausas == 0
+                        }" class="big-grey"><i class="far fa-pause-circle"></i></h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.asistentes_en_pausas }}
+                            </h5>
+                          </div>
+                          <div class="col-12">Pausa</div>
+                        </div>
+                        <br>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 pl-0 pr-0">
+                      <div class="text-center font-dashboard ">
+                        <h5 class="blue-t">Tiempos</h5>
+                        <br>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                            'red-t': zonaActual?.tiempo_espera_promedio > 600,
+                            'yellow-t': zonaActual?.tiempo_espera_promedio >= 300 && zonaActual?.tiempo_espera_promedio <= 600,
+                            'green-t': zonaActual?.tiempo_espera_promedio < 300
+                            }" class="big-grey"><i class="far fa-clock"></i>
+                            </h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.tiempo_espera_promedio | convertirSegundosHora }}</h5>
+                          </div>
+                          <div class="col-12">Promedio de espera</div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                          <div class="col-6 text-right">
+                            <h5 [ngClass]="{
+                            'red-t': zonaActual?.tiempo_atencion_promedio > 600,
+                            'yellow-t': zonaActual?.tiempo_atencion_promedio >= 300 && zonaActual?.tiempo_atencion_promedio <= 600,
+                            'green-t': zonaActual?.tiempo_atencion_promedio < 300
+                            }" class="big-grey"><i class="far fa-clock"></i>
+                            </h5>
+                          </div>
+                          <div class="col-6 text-left pl-0">
+                            <h5> {{ zonaActual?.tiempo_atencion_promedio | convertirSegundosHora }}</h5>
+                          </div>
+                          <div class="col-12">Promedio de atención</div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 pl-0 pr-0">
+                      <div class="text-center font-dashboard">
+                        <h5 class="blue-t">SLA</h5>
+                        <div class="row">
+                          <div class="col-8 offset-2 text-center">
+                            <!-- <div class="text-center font-dashboard-1 chart-pad"></div> -->
+                            <canvas baseChart id="myChart3" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_abandono < 10"
+                              [data]="[zonaActual?.porcentaje_abandono, 100-zonaActual?.porcentaje_abandono]"
+                              [chartType]="doughnutChartType" [colors]="doughnutChartColors1"
+                              [options]="doughnutChartOptions">
+                            </canvas>
+
+                            <canvas baseChart id="myChart3" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_abandono >= 10 && zonaActual?.porcentaje_abandono <= 20"
+                              [data]="[zonaActual?.porcentaje_abandono, 100-zonaActual?.porcentaje_abandono]"
+                              [chartType]="doughnutChartType" [colors]="doughnutChartColors2"
+                              [options]="doughnutChartOptions">
+                            </canvas>
+
+                            <canvas baseChart id="myChart3" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_abandono > 20"
+                              [data]="[zonaActual?.porcentaje_abandono, 100-zonaActual?.porcentaje_abandono]"
+                              [chartType]="doughnutChartType" [colors]="doughnutChartColors3"
+                              [options]="doughnutChartOptions">
+                            </canvas>
+                            <h6 class="big-grey">Abandono {{ zonaActual?.porcentaje_abandono }}%
+                            </h6>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-8 offset-2 text-center">
+                            <!-- <div class="text-center font-dashboard-1 chart-pad"></div> -->
+
+                            <canvas baseChart id="myChart4" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_nivel_servicio > 80"
+                              [data]="[zonaActual?.porcentaje_nivel_servicio, 100-zonaActual?.porcentaje_nivel_servicio]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors1">
+                            </canvas>
+
+                            <canvas baseChart id="myChart4" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_nivel_servicio >= 70 && zonaActual?.porcentaje_nivel_servicio <= 80"
+                              [data]="[zonaActual?.porcentaje_nivel_servicio, 100-zonaActual?.porcentaje_nivel_servicio]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors2">
+                            </canvas>
+
+                            <canvas baseChart id="myChart4" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_nivel_servicio < 70"
+                              [data]="[zonaActual?.porcentaje_nivel_servicio, 100-zonaActual?.porcentaje_nivel_servicio]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors3">
+                            </canvas>
+                            <h6 class="big-grey">Servicio {{ zonaActual?.porcentaje_nivel_servicio }}%
+                            </h6>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-8 offset-2 text-center">
+                            <!-- <div class="text-center font-dashboard-1 chart-pad"></div> -->
+
+                            <canvas baseChart id="myChart5" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_actividad > 80"
+                              [data]="[zonaActual?.porcentaje_actividad, 100-zonaActual?.porcentaje_actividad]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors1">
+
+                            </canvas>
+
+                            <canvas baseChart id="myChart5" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_actividad >= 70 && zonaActual?.porcentaje_actividad <= 80"
+                              [data]="[zonaActual?.porcentaje_actividad, 100-zonaActual?.porcentaje_actividad]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors2">
+                            </canvas>
+
+                            <canvas baseChart id="myChart5" width="300px" height="300px"
+                              *ngIf="zonaActual?.porcentaje_actividad < 70"
+                              [data]="[zonaActual?.porcentaje_actividad, 100-zonaActual?.porcentaje_actividad]"
+                              [chartType]="doughnutChartType" [options]="doughnutChartOptions"
+                              [colors]="doughnutChartColors3">
+                            </canvas>
+                            <h6 class="big-grey">Actividad {{ zonaActual?.porcentaje_actividad }}%
+                            </h6>
+                          </div>
+                        </div>
+                        <hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Servicios -->
+                <div class="row">
+                  <div class="col-lg-4 col-xl-4 col-sm-12  mt-1 mb-1"
+                    *ngFor="let row of zonaActual.servicios; let i = index">
+                    <div class="title-blue">Serie | {{ row.serie }}</div>
+                    <div class="content-white">
+                      <h4 class="text-center color-blue font-italic"> Emitidos : {{ row.emitidos }}</h4>
+                      <div class="row mini-box">
+                        <div class="col-12">
+                          <hr class="mid-mar">
+                        </div>
+                        <div class="col-12 text-center">
+                          <h5><i class="fas fa-user blue-icon"></i> Atendidos</h5>
+                        </div>
+                        <div class="col-4 text-center"><span class="detalle">Normal</span><br><span
+                            class="big-grey">{{ row.AteNormal }}</span></div>
+                        <div class="vertical_line"></div>
+                        <!-- <div class="col-2 text-center"><span class="detalle">TOL</span><br><span
+                            class="big-grey">{{ row.AteTOL }}</span></div> -->
+                        <div class="vertical_line"></div>
+                        <div class="col-4 text-center"><span class="detalle">Especial</span><br><span
+                            class="big-grey">{{ row.AteEsp }}</span></div>
+                        <div class="vertical_line"></div>
+                        <div class="col-4 text-center"><span class="detalle">Total</span><br><span
+                            class="big-grey">{{ row.AteTotal }}</span></div>
+
+                        <div class="col-12">
+                          <hr class="mid-mar">
+                        </div>
+
+                        <div class="col-5 pr-0">
+                          <i class="fas fa-user-times blue-icon"></i><span class="detalle"> Perdidos :
+                            {{ row.perdidos }}</span>
+                        </div>
+                        <!-- <div class="col-7">
+                          <i class="fas fa-user-alt-slash blue-icon"></i> <span class="detalle"> Cancelados TOL
+                            :</span><span class="big-grey"> {{ row.cancelados }}</span>
+                        </div> -->
+
+                        <div class="col-12">
+                          <hr class="mid-mar">
+                        </div>
+
+                        <div class="col-4 pr-0">
+                          <i class="fas fa-pause-circle blue-icon"></i><span class="detalle"> En espera</span>
+                        </div>
+
+                        <div class="col-4 pr-0 pl-1">
+                          <span class="detalle">Oficina : {{ row.EspOficina }} </span>
+                          <!-- <h6 class="big-grey">
+                                                       </h6> -->
+                        </div>
+
+                        <!-- <div class="col-4 pr-0 pl-1 ">
+                          <span class="detalle">TOL: {{ row.EspTOL }}</span>
+                        </div> -->
+
+                        <div class="col-12">
+                          <hr class="mid-mar">
+                        </div>
+
+                        <div class="col-12 text-center">
+                          <h5><i class="fas fa-clock  blue-icon"></i> Tiempo Máximo</h5>
+                        </div>
+                        <div class="col-6 pr-0">
+                          <!-- <span class="big-grey">{{ row.TMEspera }}</span></div> -->
+                          <h6 class="big-grey detalle" [ngClass]="{'red-t': row.TMEspera < 0}"> <i
+                              class="fas fa-pause-circle blue-icon"></i>Espera:
+                            {{ row.TMEspera | convertirSegundosHora }}</h6>
+                        </div>
+                        <div class="vertical_small"></div>
+                        <div class="col-6 pr-0">
+                          <!-- <span class="big-grey">{{ row.TMAtencion }}</span> -->
+                          <h6 class="big-grey detalle" [ngClass]="{'red-t': row.TMAtencion < 0}"><i
+                              class="fas fa-check-circle blue-icon"></i>Atención:
+                            {{ row.TMAtencion | convertirSegundosHora }}</h6>
+                        </div>
+
+                        <div class="col-12">
+                          <hr class="mid-mar">
+                        </div>
+
+                        <div class="col-12 text-center">
+                          <i class="fas fa-users blue-icon"></i> <span class="detalle">Ejecutivos Activos:
+                          </span><span class="big-grey">{{ row.eje }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Servicios -->
+
+                <!-- Card body -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

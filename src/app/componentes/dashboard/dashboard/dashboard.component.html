@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <div id="content">
+    <div class="container-fluid">
+      <div class="tittle-inside"><span>Oficinas Zonas</span></div>
+      <div class="arrow-right"></div>
+        <app-zonas #zonas [hidden]="!mostrarZonas"></app-zonas>
+
+        <div class="row">
+        <div class="col-12">
+          <app-oficina-status-tabla #sucursales [hidden]="!mostrarReporte"></app-oficina-status-tabla>
+          <app-oficina-status-detalles #detalles [hidden]="!mostrarDetalles"></app-oficina-status-detalles>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

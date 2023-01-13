@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Carga de Trabajo Diaria</span></div>
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+            
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+
+          <app-carga-de-trabajo-diaria-form #form [hidden]="!mostrarForm"></app-carga-de-trabajo-diaria-form>
+
+        </div>
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+          <div class="content-white no-padding">
+            <app-serie-radio #series [hidden]="!mostrarSeries" style="height: 200px;"></app-serie-radio>
+          </div>
+        </div>
+
+        <div class="col-12">
+       
+            <app-carga-de-trabajo-diaria-tabla #tabla [hidden]="!mostrarTabla"></app-carga-de-trabajo-diaria-tabla>
+         
+        </div>
+      </div>
+
+      <app-carga-de-trabajo-diaria-reporte #reporte [hidden]="!mostrarReporte"></app-carga-de-trabajo-diaria-reporte>
+      <app-carga-de-trabajo-diaria-grafico #grafico [hidden]="!mostrarGrafico"></app-carga-de-trabajo-diaria-grafico>
+
+    </div>
+  </div>
+</div>

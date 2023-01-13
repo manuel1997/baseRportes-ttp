@@ -1,0 +1,87 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="volver()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+    <div class="content-white">
+      <div class="row">
+        <div class="col-6 col-sm-12">
+          <h3 class="text-center big-grey">
+            <i class="fas fa-building"></i>{{ oficina }}
+          </h3>
+        </div>
+     
+        <div class="col-6 col-sm-12">
+          <div class="row">
+            <div class="col-12">
+          <label class="input-text">
+            <i class="fas fa-caret-right blue-icon"></i>Serie :{{ serie }}
+          </label>
+        </div>
+        <div class="col-12">
+          <label class="input-text">
+            <i class="fas fa-caret-right blue-icon"></i>Entre Días: {{ entreDias }} - {{ entreHoras }}
+          </label>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="35" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td width="15%" rowspan="2">Hora</td>
+            <td width="15%"rowspan="2">Turnos Emitidos</td>
+            <td width="30%"colspan="4">Turnos Atendidos</td>
+            <td width="15%"rowspan="2">Turnos Perdidos</td>
+            <td width="15%"rowspan="2">Turnos Perdidos TOL</td>
+          </tr>
+          <tr>
+            <td>Normal</td>
+            <td>TOL</td>
+            <td>Especial</td>
+            <td>Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let row of rows_resumenDeOficina">
+            <td> {{ row.hora }} </td>
+            <td> {{ row.turnosEmitidos }} </td>
+            <td> {{ row.normal }} </td>
+            <td> {{ row.tol }} </td>
+            <td> {{ row.especial }} </td>
+            <td> {{ row.total }} </td>
+            <td> {{ row.turnosPerdidos }} </td>
+            <td> {{ row.turnosPerdidosTol }} </td>
+          </tr>
+          <tr class="text-center">
+            <td rowspan="2">Totales</td>
+            <td rowspan="2">{{ totalTurnosEmitidos }}</td>
+            <td>{{ totalTurnosNormal }}</td>
+            <td>{{ totalTurnosTol }}</td>
+            <td>{{ totalTurnosEspecial }}</td>
+            <td>{{ totalTurnosTotal }}</td>
+            <td>{{ totalTurnosPerdidos }}</td>
+            <td>{{ totalTurnosPerdidosTol }}</td>
+          </tr>
+          <tr class="text-center">
+            <td colspan="6">{{ totalTurnosGeneral }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

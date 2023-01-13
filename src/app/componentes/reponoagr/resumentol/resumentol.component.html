@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Resumen TOL</span></div>
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+        <div class="col-12" *ngIf="mostrarForm">
+          <div class="top-button">
+            <button type="button" class="blue-bottom" role="link" (click)="enviar()" data-toggle="tooltip" title="Reporte">
+              <i class="far fa-list-alt"></i>
+            </button>
+            <button type="button" class="blue-bottom btn-green" (click)="excel()" data-toggle="tooltip" title="Exportar Excel">
+              <i class="far fa-file-excel"></i>
+            </button>                  
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+
+          <app-resumentol-form #parametros [hidden]="!mostrarForm"></app-resumentol-form>
+
+        
+            <app-series #resumen [hidden]="!mostrarForm"></app-series>
+          
+        </div>
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+          <app-oficinas #oficinas [hidden]="!mostrarForm"></app-oficinas>
+        </div>
+      </div>
+
+      <app-resumentol-reporte #reporte [hidden]="!mostrarReporte"></app-resumentol-reporte>
+
+    </div>
+
+  </div>
+</div>

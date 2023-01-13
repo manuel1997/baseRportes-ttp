@@ -1,0 +1,7 @@
+#content {height: 70vh;}
+    
+@media screen and (min-width: 1850px) {
+    #content {
+      height: 56vh;
+    }
+}

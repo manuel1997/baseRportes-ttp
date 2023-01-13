@@ -1,0 +1,260 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <!-- <div id="loader" [ngClass]="{'loader animated fadeIn fast': loading}"></div> -->
+  <div id="loader" [ngClass]="{'loader': loading}"></div>
+
+  <!-- <div *ngIf="!loading" class="animated fadeIn"> -->
+  <div *ngIf="!loading">
+    <ng-container *ngIf="errorSinDatos">
+
+      <div class="content-white no-padding alert-danger">
+        <div class="title-grey">
+          <h3 class="big-grey text-white">Error</h3>
+        </div>
+
+        <h2 class="big-grey blue-t die-m-t"><i class="fas fa-cube"></i>
+          <p class="font-dashboard fail">
+            No existe la zona seleccionada.
+          </p>
+        </h2>
+
+        <button class="btn btn-form" (click)="volver()">Volver <i class="fas fa-undo-alt"></i></button>
+      </div>
+    </ng-container>
+
+    <div id="content" *ngIf="!errorSinDatos">
+
+      <div class="container-fluid">
+
+        <div class="tittle-inside"><span>Sucursales Zonas</span></div>
+
+        <div class="arrow-right"></div>
+
+        <div class="row row-explorer">
+
+          <div class="col-12">
+
+            <div class="title-grey"><i class="fas fa-building"></i> Metricas Zona {{ nombreZona }}</div>
+
+            <div class="content-white">
+
+              <div class="row">
+
+                <div class="col-lg-3 col-xl-3 col-sm-12 col-md-12 col-12 text-left">
+
+                  <div class="row">
+                    <div class="col-2">
+                      <h5 class="big-grey blue-t"><i class="fas fa-building"></i></h5>
+                    </div>
+                    <div class="col-4"><span class="big-grey">{{ nombreSucursal }}</span></div>
+                    <div class="col-6 bor-right">
+                      <select (change)="actualizarSucursalActual(sucursalSelect.value)" class="input-style no-padding"
+                        #sucursalSelect>
+                        <option *ngFor="let sucursal of sucursales" [value]="sucursal.id_sucursal">
+                          {{ sucursal.nombre_sucursal }}</option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-4 col-xl-4 col-sm-6 col-md-6 col-12 text-left  bor-right">
+
+                  <div class="row">
+
+                    <div class="col-2">
+                      <h5 class="big-grey blue-t"><i class="far fa-clock"></i></h5>
+                    </div>
+
+                    <div class="col-7">
+                      <span class="big-grey "> Intervalo de Refresco
+                      </span>
+                    </div>
+
+                    <div class="col-lg-3 col-xl-3 col-sm-4 col-md-4 col-3 w-25">
+                      <select [(ngModel)]="intervalo" id="data_refresh" (change)="refrescarDatos()" class="input-style no-padding float-left">
+                        <option [value]="180000">3 min</option>
+                        <option [value]="300000">5 min</option>
+                        <option [value]="420000">7 min</option>
+                        <option [value]="600000">10 min</option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-3 col-xl-3 col-12 text-center  bor-right mt-1">
+                  <h6 class="big-grey green-t"><i class="fas fa-user-circle"></i>{{sucursalActual?.ticket_emitidos}}
+                    Turnos Emitidos</h6>
+                </div>
+                <div class="col-2 text-center">
+                  <ng-container *ngIf="id != 0">
+                    <div>
+                      <button class="btn btn-form" style="font-size:12px;margin:0px" (click)="informacionSucursal(sucursalActual?.id_sucursal)">Detalle <i class="far fa-list-alt"></i></button>
+                    </div>
+                    <div>
+                      <button class="btn btn-form" style="font-size:12px;margin:0px" (click)="volver()">Volver <i class="fas fa-undo-alt"></i></button>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="id == 0">
+                    <button class="btn btn-form" style="font-size:12px;margin:0px" (click)="volver()">Volver <i class="fas fa-undo-alt"></i></button>
+                  </ng-container>
+                </div>
+
+                <div class="col-12"><hr></div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6  text-center  font-dashboard  bor-right">
+                  <h5 class="big-grey blue-c">Ejecutivos</h5>
+                    <div class="row">
+
+                      <div class="col-6 text-right">
+                        <h5 class="big-grey" [ngClass]="{
+                          'red-t': sucursalActual?.ejecutivos_atendiendo < 3,
+                          'yellow-t': sucursalActual?.ejecutivos_atendiendo >= 3 && sucursalActual?.ejecutivos_atendiendo <= 5,
+                          'green-t': sucursalActual?.ejecutivos_atendiendo > 5
+                          }"><i class="fas fa-check-circle"></i>
+                        </h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey "> {{ sucursalActual?.ejecutivos_atendiendo }}</h5>
+                      </div>
+                      <div class="col-12 text-center">Atendiendo</div>
+
+                      <div class="col-12"><hr></div>
+
+                      <div class="col-6 text-right">
+                        <h5 class="big-grey" [ngClass]="{
+                          'red-t': sucursalActual?.ejecutivos_pausa > 2,
+                          'yellow-t': sucursalActual?.ejecutivos_pausa >= 1 && sucursalActual?.ejecutivos_pausa <= 2,
+                          'green-t': sucursalActual?.ejecutivos_pausa == 0
+                        }"><i class="fas fa-pause-circle"></i></h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                      <h5 class="big-grey"> {{ sucursalActual?.ejecutivos_pausa }}</h5></div>
+                      <div class="col-12 text-center">En Pausa</div>
+
+                      <div class="col-12"><hr></div>
+
+                      <div class="col-6">
+                        <h5 class="big-grey text-right red-t"><i class="fas fa-user-circle"></i></h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey">{{ sucursalActual?.ejecutivos_desconectados }}</h5>
+                      </div>
+                      <div class="col-12">Desconectados</div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xl-3 col-12 text-center  font-dashboard   bor-right">
+                  <h5 class="big-grey blue-t">Clientes</h5>
+                  <div class="row">
+                    <div class="col-6 text-right ">
+                      <h5 class="big-grey green-t"><i class="fas fa-user-circle"></i></h5>
+                    </div>
+                    <div class="col-6 text-left pl-0">
+                      <h5 class="big-grey"> {{ sucursalActual?.clientes_atendidos }}</h5>
+                    </div>
+                    <div class="col-12 text-center">Atendidos</div>
+                    <div class="col-12"><hr></div>
+
+                    <div class="col-6 text-right ">
+                      <h5 class="big-grey" [ngClass]="{
+                      'red-t': sucursalActual?.clientes_espera > 9,
+                      'yellow-t': sucursalActual?.clientes_espera >= 5 && sucursalActual?.clientes_espera <= 9,
+                      'green-t': sucursalActual?.clientes_espera < 5}">
+                        <i class="fas fa-users"></i>
+                      </h5>
+                    </div>
+                    <div class="col-6 text-left pl-0">
+                      <h5 class="big-grey">{{ sucursalActual?.clientes_espera }}</h5>
+                    </div>
+                    <div class="col-12 text-center">En Espera</div>
+                    <div class="col-12"><hr></div>
+
+                    <div class="col-6 text-right ">
+                      <h5 class="big-grey red-t"><i class="fas fa-exclamation-circle"></i></h5>
+                    </div>
+                    <div class="col-6 text-left pl-0">
+                      <h5 class="big-grey">{{ sucursalActual?.clientes_abandonados }}</h5>
+                    </div>
+                    <div class="col-12 text-center">Abandonados</div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-xl-3 col-12 text-center  font-dashboard   bor-right">
+                  <h5 class="big-grey blue-t">Estados</h5>
+                  <div class="row">
+                    <div class="col-7 text-right">
+                      <h5 [ngClass]="{
+                        'red-t': sucursalActual?.nivel_servicio < 70,
+                        'yellow-t': sucursalActual?.nivel_servicio >= 70 && sucursalActual?.nivel_servicio <= 80,
+                        'green-t': sucursalActual?.nivel_servicio > 80
+                      }" class="big-grey">{{ sucursalActual?.nivel_servicio | number : '1.1' }}
+                      </h5>
+                    </div>
+                    <div class="col-5 text-left pl-0">
+                      <h5><i class="fas fa-percentage"></i></h5>
+                    </div>
+                    <div class="col-12">Nivel Servicio</div>
+
+                    <div class="col-12"><hr></div>
+
+                    <div class="col-7 text-right ">
+                      <h5 class="big-grey" [ngClass]="{
+                        'red-t': sucursalActual?.porcentaje_abandono > 20,
+                        'yellow-t': sucursalActual?.porcentaje_abandono >= 10 && sucursalActual?.porcentaje_abandono <= 20,
+                        'green-t': sucursalActual?.porcentaje_abandono < 10
+                      }">{{ sucursalActual?.porcentaje_abandono | number : '1.1' }}
+                      </h5>
+                    </div>
+                    <div class="col-5 text-left pl-0">
+                      <h5><i class="fas fa-percentage"></i></h5>
+                    </div>
+                    <div class="col-12"> Abandono</div>
+
+                    <div class="col-12"><hr></div>
+                    <div class="col-7 text-right">
+                      <h5 class="big-grey blue-t">{{ sucursalActual?.porcentaje_actividad | number : '1.1' }}</h5>
+                    </div>
+                    <div class="col-5 text-left pl-0">
+                      <h5><i class="fas fa-percentage"></i></h5>
+                    </div>
+                    <div class="col-12"> Actividad</div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-xl-3 col-12 text-center  font-dashboard  ">
+                  <h5 class="big-grey blue-t">Tiempos</h5>
+                  <h5 [ngClass]="{
+                    'red-t': sucursalActual?.tiempo_max_espera > 720,
+                    'yellow-t': sucursalActual?.tiempo_max_espera >= 480 && sucursalActual?.tiempo_max_espera <= 720,
+                    'green-t': sucursalActual?.tiempo_max_espera < 480
+                  }" class="big-grey green-t"><i class="far fa-clock"></i> {{ sucursalActual?.tiempo_max_espera |
+                    convertirSegundosHora }}</h5>Máximo de Espera
+                  <hr>
+                  <h5 [ngClass]="{
+                    'red-t': sucursalActual?.tiempo_med_espera > 600,
+                    'yellow-t': sucursalActual?.tiempo_med_espera >= 300 && sucursalActual?.tiempo_med_espera <= 600,
+                    'green-t': sucursalActual?.tiempo_med_espera < 300
+                  }" class="big-grey green-t"><i class="far fa-clock"></i> {{ sucursalActual?.tiempo_med_espera |
+                    convertirSegundosHora }}</h5>Medio de Espera
+                  <hr>
+                  <h5 [ngClass]="{
+                    'red-t': sucursalActual?.tiempo_med_atencion > 600,
+                    'yellow-t': sucursalActual?.tiempo_med_atencion >= 300 && sucursalActual?.tiempo_med_atencion <= 600,
+                    'green-t': sucursalActual?.tiempo_med_atencion < 300
+                  }" class="big-grey red-t"><i class="far fa-clock"></i> {{ sucursalActual?.tiempo_med_atencion |
+                    convertirSegundosHora }}</h5>Medio de Atención
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<table class="t-products">
+    <colgroup>
+        <col span="11" style="border: 1px solid #e7e7e7;">
+    </colgroup>
+    <thead>
+      <tr>
+        <td width="4%">&nbsp;<i class="fas fa-hashtag"></i>&nbsp;</td>
+        <td><i class="fas fa-building"></i> Oficina</td>
+        <td width="4%"></td>
+        <td width="4%"></td>
+
+        <td width="12%">Fecha Min</td>
+        <td width="12%">Fecha Max</td>
+        <td width="1.5%"></td>
+      </tr>
+    </thead>
+    </table>
+<div class="content-white no-padding">
+  <table class="t-products">
+    <colgroup>
+        <col span="11" style="border: 1px solid #e7e7e7;">
+    </colgroup>
+   
+    <tbody>
+      <tr *ngFor="let row of rows_oficinas">
+        <th  width="4%" scope="row"> {{ row.id_oficina }} </th>
+        <td> {{ row.detalle }} </td>
+        <td width="4%"><button class="btn button-list" (click)="mostrarReporte(row.id_oficina)" title="Reportes"><i class="far fa-list-alt"></i></button></td>
+        <td width="4%"><button class="btn button-list" (click)="generarExcel(row.id_oficina)" title="Exportar Excel"><i class="far fa-file-excel"></i></button></td>
+        <td width="12%"> {{ row.fechaMin }} </td>
+        <td width="12%"> {{ row.fechaMax }} </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="divReporte" class="container" style="display:none;">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
+  <table width="50%" border='1'>
+    <tr>
+      <td colspan=7>
+        <b><h1>Estado de Ejecutivos</h1></b>
+      </td>
+    </tr>
+  </table>
+  <table width="70%" border='1'>
+		<tr>
+			<td width=15% align="right"><b>Oficina</b></td>
+			<td width="65%" colspan="3"><b>{{ oficina }}</b></td>
+			<td width=50></td>
+			<td width=15% colspan="2">Apagado</td>
+    </tr>
+    <tr>
+		  <td align="right"><b>Día</b></td>
+		  <td colspan="3"><b>{{ dia }}</b></td>
+		  <td></td>
+		  <td colspan="2">Pausa</td>
+    </tr>
+    <tr>
+		  <td align="right"><b>Entre Horas</b></td>
+		  <td colspan="3"><b>{{ entreHoras }}</b></td>
+		  <td></td>
+		  <td colspan="2">Activo</td>
+		</tr>
+	</table>
+	<br>
+	<table border='1'>
+		<tr align="center">
+			<td align="left">Ejecutivo</td>
+			<td colspan="1" width="20" *ngFor="let row of tiempo">
+				{{ row }}
+			</td>
+		</tr>
+    <tr align="center" *ngFor="let row of rows_ejecutivos; let i=index">
+      <td align="left">{{ row.detalle }}</td>
+      <td width=20 *ngFor="let accion of rows_acciones[i]" [style.background-color]="accion.tipo">
+      </td>
+    </tr>
+	</table>
+  <br>
+</div>
+
+<!--
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
+  <table width="50%" border='1'>
+    <tr>
+      <td colspan=7>
+        <b><h1>Estado de Ejecutivos</h1></b>
+      </td>
+    </tr>
+  </table>
+  <table width="70%" border='1'>
+		<tr>
+			<td bgcolor='#99ccff' width=15% align="right"><b>Oficina</b></td>
+			<td width="65%" colspan="3"><b>{{ oficina }}</b></td>
+			<td bgcolor='#ffffff' width=50></td>
+			<td width=15% colspan="2">Apagado</td>
+    </tr>
+    <tr>
+		  <td bgcolor='#99ccff' align="right"><b>Día</b></td>
+		  <td colspan="3"><b>{{ dia }}</b></td>
+		  <td bgcolor='#ff0000'></td>
+		  <td colspan="2">Pausa</td>
+    </tr>
+    <tr>
+		  <td bgcolor='#99ccff' align="right"><b>Entre Horas</b></td>
+		  <td colspan="3"><b>{{ entreHoras }}</b></td>
+		  <td bgcolor='#00ff00'></td>
+		  <td colspan="2">Activo</td>
+		</tr>
+	</table>
+	<br>
+	<table border='1'>
+		<tr align="center">
+			<td bgcolor='#99ccff' align="left">Ejecutivo</td>
+			<td bgcolor='#99ccff' colspan="1" width="20" *ngFor="let row of tiempo">
+				{{ row }}
+			</td>
+		</tr>
+    <tr align="center" *ngFor="let row of rows_ejecutivos; let i=index">
+      <td align="left">{{ row.detalle }}</td>
+      <td width=20 *ngFor="let accion of rows_acciones[i]" [style.background-color]="accion.tipo">
+      </td>
+    </tr>
+	</table>
+  <br>
+-->

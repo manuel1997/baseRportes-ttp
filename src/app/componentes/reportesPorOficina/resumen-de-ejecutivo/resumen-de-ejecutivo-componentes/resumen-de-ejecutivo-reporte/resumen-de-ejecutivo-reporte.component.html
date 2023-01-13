@@ -1,0 +1,137 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+      <button type="button" class="blue-bottom" role="link" (click)="volver()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-lg-12 col-12 col-md-6 col-sm-6">
+      <div class="title-grey"><i class="fas fa-building"></i> Oficina</div>
+      <div class="content-white">
+        <div class="row">
+            <div class="col-6">
+                <h3 class=" big-grey">
+                  <i class="fas fa-building"></i> {{ titulo }}
+                </h3>
+              </div>
+              <div class="col-6">
+                  <i class="fas fa-caret-right blue-icon"></i>
+            <label class="input-text">Rango de Fechas</label>
+            <label class="input-text">{{ rangoFecha }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="5" style="border-left: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td rowspan="2">Ejecutivo</td>
+            <td colspan="2">Apagado</td>
+            <td colspan="2">Activo</td>
+            <td colspan="2">Atendiendo</td>
+            <td colspan="2">Pausa</td>
+          </tr>
+          <tr>
+            <td>h:mm:ss</td>
+            <td>%</td>
+            <td>h:mm:ss</td>
+            <td>%</td>
+            <td>h:mm:ss</td>
+            <td>%</td>
+            <td>h:mm:ss</td>
+            <td>%</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows_agrupacionesReportes">
+            <td scope="row"> {{ row.ejecutivo }} </td>
+            <td> {{ row.apagadoHora }} </td>
+            <td> {{ row.apagadoPorcentaje }} </td>
+            <td> {{ row.activoHora }} </td>
+            <td> {{ row.activoPorcentaje }} </td>
+            <td> {{ row.atendiendoHora }} </td>
+            <td> {{ row.atendiendoPorcentaje }} </td>
+            <td> {{ row.pausaHora }} </td>
+            <td> {{ row.pausaPorcentaje }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--
+<h3>Resumen de Ejecutivo</h3>
+<br />
+<div class="row">
+  <div class="col-lg-4">
+    <div class="form-group">
+      <p class="text-right">Oficina</p>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      <p class="text-left">{{ titulo }}</p>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" (click)="volver()">Volver</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <div class="form-group">
+      <p class="text-right">Entre Días</p>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      <p class="text-left"> {{ rangoFecha }} </p>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" rowspan="2" class="text-center">Ejecutivo</th>
+      <th scope="col" colspan="2" class="text-center">Apagado</th>
+      <th scope="col" colspan="2" class="text-center">Activo</th>
+      <th scope="col" colspan="2" class="text-center">Atendiendo</th>
+      <th scope="col" colspan="2" class="text-center">Pausa</th>
+    </tr>
+    <tr>
+      <th scope="col" class="text-center">H:MM:SS</th>
+      <th scope="col" class="text-center">%</th>
+      <th scope="col" class="text-center">H:MM:SS</th>
+      <th scope="col" class="text-center">%</th>
+      <th scope="col" class="text-center">H:MM:SS</th>
+      <th scope="col" class="text-center">%</th>
+      <th scope="col" class="text-center">H:MM:SS</th>
+      <th scope="col" class="text-center">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows_agrupacionesReportes">
+      <td scope="row"> {{ row.ejecutivo }} </td>
+      <td> {{ row.apagadoHora }} </td>
+      <td> {{ row.apagadoPorcentaje }} </td>
+      <td> {{ row.activoHora }} </td>
+      <td> {{ row.activoPorcentaje }} </td>
+      <td> {{ row.atendiendoHora }} </td>
+      <td> {{ row.atendiendoPorcentaje }} </td>
+      <td> {{ row.pausaHora }} </td>
+      <td> {{ row.pausaPorcentaje }} </td>
+    </tr>
+  </tbody>
+</table>
+-->
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

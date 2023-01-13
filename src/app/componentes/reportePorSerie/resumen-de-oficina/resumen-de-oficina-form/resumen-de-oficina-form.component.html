@@ -1,0 +1,155 @@
+<div class="title-grey"><i class="far fa-file-alt"></i> Parámetros del Reporte</div>
+<div class="content-white">
+  <div class="row">
+    <div class="col-2 col-xs-12">
+      <label for="txtDesde" class="input-text">Desde</label>
+    </div>
+    <div class="col-4">
+        <input [(ngModel)]="fechaInicial" class="input-style" type="date" id="txtDesde">
+    </div>
+    <div class="col-2">
+      <label for="txtHasta" class="input-text">Hasta</label>
+    </div>
+    <div class="col-4">
+        <input [(ngModel)]="fechaFinal" class="input-style" type="date" id="txtHasta">
+    </div>
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+    <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+      <label for="txtHoraInicial1" class="input-text align-middle">Hora Inicial 1<span class="detalle"> (24hrs)</span></label>
+    </div>
+    <div class="col-2">
+        <input [(ngModel)]="horaInicial" type="number" class="input-style" id="txtHoraInicial1" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+
+    </div>
+    <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+      <label for="txtHoraFinal1" class="input-text">Hora Final 1<span class="detalle"> (24hrs)</span></label>
+    </div>
+    <div class="col-2">
+        <input [(ngModel)]="horaFinal" type="number" type="number" class="input-style" id="txtHoraFinal1" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+
+    </div>
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+    <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+      <label for="txtHoraInicial2" class="input-text align-middle">Hora Inicial 2<span class="detalle"> (24hrs)</span></label>
+    </div>
+    <div class="col-2">
+        <input [(ngModel)]="horaInicial2" type="number" class="input-style" id="txtHoraInicial2" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+
+    </div>
+    <div class="col-4 col-xs-12 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+      <label class="input-text">Hora Final 2<span class="detalle"> (24hrs)</span></label>
+    </div>
+    <div class="col-2">
+        <input [(ngModel)]="horaFinal2" type="number" class="input-style" id="txtHoraFinal2" onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;" min="0" max="23">
+
+    </div>
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+  
+    <div class="col-4 pr-0">
+        <i class="fas fa-clock blue-icon"></i>
+      <label for="txtIntervalo" class="input-text">Intervalo<span class="detalle"> (min)</span></label>
+    
+    
+    </div>
+    <div class="col-2">
+        <input [(ngModel)]="intervalo" type="number" class="input-style" id="txtIntervalo">
+    </div>
+    <div class="col-12">
+        <hr class="mid-mar">
+      </div>
+    <div class="col-12">
+        <i class="far fa-calendar-check  blue-icon"></i>
+        <label class="input-text align-middle">Seleccionar días</label>
+      </div>
+     
+<div class="col-6">
+<div class="row">
+  <div class="col-8">
+     
+      <label class="input-text align-middle">» Lunes </label>
+  </div>
+  <div class="col-4">
+      <input [(ngModel)]="checkDias[0]" type="checkbox">
+  </div>
+  <div class="col-8">
+     
+      <label class="input-text align-middle">» Martes </label>
+    </div>
+    <div class="col-4">
+        <input [(ngModel)]="checkDias[1]" type="checkbox">
+      </div>
+    <div class="col-8">
+        <label class="input-text align-middle">» Miercoles </label>
+      </div>
+      <div class="col-4">
+          <input [(ngModel)]="checkDias[2]" type="checkbox">
+        </div>
+      <div class="col-8">
+       
+          <label class="input-text align-middle">» Jueves </label>
+        </div>
+        <div class="col-4">
+            <input type="checkbox" [(ngModel)]="checkDias[3]">
+          </div>
+</div>
+
+</div>
+
+<div class="col-6">
+    <div class="row">
+      <div class="col-8">
+          
+          <label class="input-text align-middle">» Viernes </label>
+      </div>
+      <div class="col-4">
+          <input type="checkbox" [(ngModel)]="checkDias[4]">
+      </div>
+      <div class="col-8">
+          
+          <label class="input-text align-middle">» Sabado</label> 
+        </div>
+        <div class="col-4">
+            <input type="checkbox" [(ngModel)]="checkDias[5]">
+        </div>
+        <div class="col-8">
+       
+            <label class="input-text align-middle">» Domingo</label>
+          </div>
+          <div class="col-4"> <input type="checkbox" [(ngModel)]="checkDias[6]"></div>
+          <div class="col-8 pr-0">
+              
+              <label class="input-text align-middle">» Seleccionar Todos </label>
+            </div>
+            <div class="col-4">
+                <input [(ngModel)]="todosCheck" type="checkbox" (change)="seleccionarTodos()">
+            </div>
+    </div>
+    
+    </div>
+
+    
+      
+    <div class="col-12">
+      <hr class="mid-mar">
+    </div>
+    <!--<div class="col-4 align-middle">
+      <label class="input-text">Filtrar por Oficina</label>
+    </div>
+    <div class="col-6 align-middle">
+      <input class="input-style">
+    </div>
+    <div class="col-1 align-middle">
+      <button class="blue-bottom-small"><i class="fas fa-arrow-alt-circle-right"></i></button>
+    </div>-->
+  </div>
+</div>

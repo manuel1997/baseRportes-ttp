@@ -1,0 +1,76 @@
+<div class="col-12">
+  <div class="top-button">
+    <button type="button" class="btn btn-form" role="link" (click)="atras()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  </div>
+</div>
+
+<div class="content-white no-padding" style="max-height: 400px;">
+  <table class="t-products">
+    <colgroup>
+      <col span="35" style="border-left: 1px solid #e7e7e7;">
+    </colgroup>
+    <thead>
+      <tr>
+        <td width="15%" rowspan="2">Oficina</td>
+        <td width="3%" rowspan="2"><i class="fas fa-chart-line"></i></td>
+        <td class="no-break" width="14%" rowspan="2">Serie</td>
+        <td class="no-break" rowspan="2">Eje Act</td>
+        <td rowspan="2">Espera</td>
+        <td class="no-break"  rowspan="2">Emitidos</td>
+        <td colspan="3">Atendidos</td>
+        <td class="no-break" rowspan="2">Perdidos</td>
+        <!-- <td class="no-break"  rowspan="2">Cancel TOL</td> -->
+        <td colspan="2">Tiempo Promedio</td>
+        <td class="no-break" width="11%" rowspan="2">Hora Update</td>
+      </tr>
+
+
+      <tr>
+        <!-- <td class="no-break" >Oficina</td> -->
+        <!-- <td class="no-break" >TOL</td> -->
+        <td class="no-break" >Normal</td>
+        <!-- <td class="no-break" >TOL</td> -->
+        <td class="no-break" >Especial</td>
+        <td class="no-break" >Total</td>
+        <td class="no-break" >Espera</td>
+        <td class="no-break" >Atención</td>
+        <!-- <td class="no-break" >Delta Espera</td> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows_oficinas; let i = index">
+        <ng-template [ngIf]="row.informacion != 0" [ngIfElse]="ConInfo">
+          <td class="no-break" rowspan="row.filas">{{ row.oficina }}</td>
+          <td rowspan="row.filas">
+            <button class="btn button-list" *ngIf="row.filas" (click)="mostrarDetalle(row.ID)"><i class="fas fa-chart-line"></i></button>
+          </td>
+          <td class="no-break" >{{ row.serie }}</td>
+          <td>{{ row.eje }}</td>
+          <td>{{ row.ofiEsp }}</td>
+          <!-- <td>{{ row.TOLEsp }}</td> -->
+          <td>{{ row.emitidos }}</td>
+          <td>{{ row.NormalAte }}</td>
+          <!-- <td>{{ row.TOLAte }}</td> -->
+          <td>{{ row.EspAte }}</td>
+          <td>{{ row.TotalAte }}</td>
+          <td>{{ row.perdidos }}</td>
+          <!-- <td>{{ row.cancelados }}</td> -->
+          <td [ngClass]="{'red-t': row.TPEspera < 0}">{{ row.TPEspera | convertirSegundosHora }}</td>
+          <td [ngClass]="{'red-t': row.TPAtencion < 0}" >{{ row.TPAtencion | convertirSegundosHora }}</td>
+          <!-- <td [ngClass]="{'red-t': row.TPDeltaEspera < 0}" >{{ row.TPDeltaEspera | convertirSegundosHora }}</td> -->
+          <td class="no-break" >{{ row.update }}</td>
+        </ng-template>
+        <ng-template #ConInfo>
+          <td>{{ row.oficina }}</td>
+          <td></td>
+          <td colspan="15">Sin Información</td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Motivos de Atención</span></div>
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+              
+          <div class="col-lg-6 col-12 col-md-6 col-sm-12">
+            <app-motivos-de-atencion-form #form [hidden]="!mostrarForm"></app-motivos-de-atencion-form>
+          </div>
+          <div class="col-lg-6 col-12 col-md-6 col-sm-12">
+            <div class="content-white no-padding">
+              <app-serie-radio #series [hidden]="!mostrarSeries"></app-serie-radio>
+            </div>
+          </div>
+      </div>
+
+      <app-motivos-de-atencion-tabla #tabla [hidden]="!mostrarTabla"></app-motivos-de-atencion-tabla>
+      <app-motivos-de-atencion-reporte #reporte [hidden]="!mostrarReporte"></app-motivos-de-atencion-reporte>
+      <app-motivos-de-atencion-grafico #grafico [hidden]="!mostrarGrafico"></app-motivos-de-atencion-grafico>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!--
+<br />
+<h2>Motivos de Atención</h2>
+<br />
+<div class="row">
+  <div class="col-lg-8">
+    <app-motivos-de-atencion-form #form [hidden]="!mostrarForm"></app-motivos-de-atencion-form>
+  </div>
+  <div class="col-lg-4">
+    <app-serie-radio #series [hidden]="!mostrarSeries"></app-serie-radio>
+  </div>
+</div>
+<app-motivos-de-atencion-tabla #tabla [hidden]="!mostrarTabla"></app-motivos-de-atencion-tabla>
+<app-motivos-de-atencion-reporte #reporte [hidden]="!mostrarReporte"></app-motivos-de-atencion-reporte>
+<app-motivos-de-atencion-grafico #grafico [hidden]="!mostrarGrafico"></app-motivos-de-atencion-grafico>
+-->

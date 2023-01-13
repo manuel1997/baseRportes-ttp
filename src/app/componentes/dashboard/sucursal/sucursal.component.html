@@ -1,0 +1,425 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <!-- <div id="loader" [ngClass]="{'loader animated fadeIn fast': loading}"></div> -->
+  <div id="loader" [ngClass]="{'loader': loading}"></div>
+
+  <!-- <div *ngIf="!loading" class="animated fadeIn"> -->
+  <div *ngIf="!loading">
+    <ng-container *ngIf="error == false">
+      <div id="content">
+        <div class="container-fluid">
+          <div class="tittle-inside"><span>{{ detalleTitulo }}</span></div>
+          <div class="arrow-right"></div>
+          <div class="row row-explorer">
+            <div class="col-12">
+              <div class="title-grey"><i class="fas fa-building"></i> {{ nombreZona }}: {{ nombreSucursal }}</div>
+
+              <div class="content-white">
+                <div class="row">
+                  <div class="col-lg-5 col-xl-5 col-sm-6 col-md-6 col-12 text-left">
+                    <div class="row">
+                      <div class="col-lg-1 col-xl-1 col-sm-1 col-0"></div>
+                      <div class="col-lg-2 col-xl-2 col-1">
+                        <h5 class="big-grey blue-t float-right"><i class="fas fa-building"></i></h5>
+                      </div>
+                      <div class="col-lg-3 col-xl-3 col-sm-3 col-2 "><span>Sucursales</span></div>
+                      <div class="col-lg-5 col-xl-5 col-sm-5 col-3 bor-right">
+                        <select (change)="sucursalActual(idSucursal.value)" #idSucursal class="input-style no-padding">
+                          <!-- <option selected disabled>Seleccione...</option> -->
+                          <option *ngFor="let sucursal of sucursales" [value]="sucursal.id_sucursal"
+                            [selected]="id == sucursal.id_sucursal">
+                            {{ sucursal.nombre_sucursal }}
+                          </option>
+                        </select></div>
+                      <div class="col-1"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-5 col-xl-5 col-sm-6 col-md-6 col-12">
+                    <div class="row">
+                      <div class="col-1">
+                        <h5 class="big-grey blue-t float-right"><i class="far fa-clock"></i></h5>
+                      </div>
+                      <div class="col-lg-6 col-xl-6 col-4">
+                        <span class="big-grey"> Intervalo de Refresco</span>
+                      </div>
+                      <div class="col-lg-3 col-xl-3 col-sm-3 col-2 ">
+                        <select [(ngModel)]="intervalo" class="input-style no-padding float-left"
+                          (change)="refrescarDatos()">
+                          <option [value]="180000">3 min</option>
+                          <option [value]="300000">5 min</option>
+                          <option [value]="420000">7 min</option>
+                          <option [value]="600000">10 min</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2 col-xl-2 col-sm-2 col-2 ">
+                        <button class="btn btn-form" style="font-size:12px;margin:0px" (click)="volver()">Volver <i
+                            class="fas fa-undo-alt"></i></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-2 col-xl-2 col-0"></div>
+
+                  <div class="col-12">
+                    <hr class="mid-mar">
+                  </div>
+
+                  <div class="col-lg-2 col-xl-2 col-12 text-center font-dashboard bor-right">
+                    <h5 class="blue-t big-grey ">Ejecutivos</h5>
+                    <div class="row">
+                      <div class="col-6 text-right">
+                        <h5 class="green-t big-grey "><i class="fas fa-user-circle"></i></h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sucursal?.asistentes_sucursal }}</h5>
+                      </div>
+                      <div class="col-12">Total Sucursal</div>
+
+                      <div class="col-12">
+                        <hr>
+                      </div>
+                      <div class="col-6 text-right">
+                        <h5 [ngClass]="{
+                        'red-t': sucursal?.asistentes_atendiendo < 3,
+                        'yellow-t': sucursal?.asistentes_atendiendo >=3 && sucursal?.asistentes_atendiendo <= 5,
+                        'green-t': sucursal?.asistentes_atendiendo > 5
+                      }" class="big-grey"><i class="fas fa-check-circle"></i>
+                        </h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sucursal?.asistentes_atendiendo }}</h5>
+                      </div>
+                      <div class="col-12">Atendiendo</div>
+
+                      <div class="col-12">
+                        <hr>
+                      </div>
+                      <div class="col-6 text-right">
+                        <h5 [ngClass]="{
+                          'red-t': sucursal?.asistente_pausa > 2,
+                          'yellow-t': sucursal?.asistente_pausa >= 1 && sucursal?.asistente_pausa <= 2,
+                          'green-t': sucursal?.asistente_pausa == 0
+                        }" class="big-grey">
+                          <i class="fas fa-pause-circle"></i>
+                        </h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sucursal?.asistente_pausa }}</h5>
+                      </div>
+                      <div class="col-12">En Pausa</div>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-3 col-xl-3 col-12 text-center font-dashboard bor-right">
+                    <h5 class="blue-t big-grey">Clientes</h5>
+                    <div class="row">
+                      <div class="col-6 text-right">
+                        <h5 class="green-t big-grey"><i class="fas fa-check-circle"></i></h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sucursal?.clientes_atendidos }}</h5>
+                      </div>
+                      <div class="col-12">Atendidos</div>
+
+                      <div class="col-12">
+                        <hr>
+                      </div>
+
+                      <div class="col-6 text-right">
+                        <h5 [ngClass]="{
+                        'red-t': sucursal?.clientes_espera > 9,
+                        'yellow-t': sucursal?.clientes_espera >= 5 && sucursal?.clientes_espera <= 9,
+                        'green-t': sucursal?.clientes_espera < 5
+                        }" class="big-grey"><i class="fas fa-users"></i>
+                        </h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sucursal?.clientes_espera }}</h5>
+                      </div>
+                      <div class="col-12">Clientes en Espera</div>
+
+                      <div class="col-12">
+                        <hr>
+                      </div>
+                      <div class="col-6 text-right">
+                        <h5 class="red-t big-grey"><i class="fas fa-exclamation-circle"></i></h5>
+                      </div>
+                      <div class="col-6 text-left pl-0">
+                        <h5 class="big-grey ">{{ sumaAbandonosTotales }}</h5>
+                      </div>
+                      <div class="col-12">Abandonos</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-xl-3 col-12 text-center font-dashboard  bor-right">
+                    <h5 class="blue-t big-grey">Tiempos</h5>
+                    <h5 [ngClass]="{
+                    'red-t': sucursal?.tiempo_maximo_espera > 720,
+                    'yellow-t': sucursal?.tiempo_maximo_espera >= 480 && sucursal?.tiempo_maximo_espera <= 720,
+                    'green-t': sucursal?.tiempo_maximo_espera < 480
+                  }" class="big-grey"><i class="far fa-clock"></i> {{ sucursal?.tiempo_maximo_espera |
+                    convertirSegundosHora }}</h5>Máximo de Espera
+                    <hr>
+                    <h5 [ngClass]="{
+                    'red-t': sucursal?.tiempo_medio_espera > 600,
+                    'yellow-t': sucursal?.tiempo_medio_espera >= 300 && sucursal?.tiempo_medio_espera <= 600,
+                    'green-t': sucursal?.tiempo_medio_espera < 300
+                  }" class="big-grey"><i class="far fa-clock"></i> {{ sucursal?.tiempo_medio_espera |
+                    convertirSegundosHora }}</h5>Medio de Espera
+                    <hr>
+                    <h5 [ngClass]="{
+                    'red-t': sucursal?.tiempo_medio_atencion > 600,
+                    'yellow-t': sucursal?.tiempo_medio_atencion >= 300 && sucursal?.tiempo_medio_atencion <= 600,
+                    'green-t': sucursal?.tiempo_medio_atencion < 300
+                  }" class="big-grey"><i class="far fa-clock"></i> {{ sucursal?.tiempo_medio_atencion |
+                    convertirSegundosHora }}</h5>Medio de Atención
+                  </div>
+
+                  <div class="col-lg-2 col-xl-2 col-6 bor-right text-center">
+                    <!-- <div class="col-lg-2 col-xl-2 offset-lg-1 offset-xl-1 col-6  ml-5 text-center"> -->
+
+                    <div class="col-12 text-center font-dashboard-1">Abandono Total</div>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sucursal?.abandono_total < 10"
+                      [data]="[sucursal?.abandono_total, 100-sucursal?.abandono_total]" [chartType]="doughnutChartType"
+                      [options]="doughnutChartOptions" [colors]="doughnutChartColors1">
+                    </canvas>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sucursal?.abandono_total >= 10 && sucursal?.abandono_total <= 20"
+                      [data]="[sucursal?.abandono_total, 100-sucursal?.abandono_total]" [chartType]="doughnutChartType"
+                      [options]="doughnutChartOptions" [colors]="doughnutChartColors2">
+                    </canvas>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sucursal?.abandono_total > 20"
+                      [data]="[sucursal?.abandono_total, 100-sucursal?.abandono_total]" [chartType]="doughnutChartType"
+                      [options]="doughnutChartOptions" [colors]="doughnutChartColors3">
+                    </canvas>
+
+                    <span class="big-grey">
+                      <h5>{{ sucursal?.abandono_total }}%</h5>
+                    </span>
+
+                  </div>
+
+
+                  <div class="col-lg-2 col-xl-2 col-6 text-center">
+
+                    <div class="col-12 text-center font-dashboard-1">Nivel de servicio</div>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sumaNivelDeServicio > 80" [data]="[sumaNivelDeServicio, 100-sumaNivelDeServicio]"
+                      [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColors1">
+                    </canvas>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sumaNivelDeServicio >= 70 && sumaNivelDeServicio <= 80"
+                      [data]="[sumaNivelDeServicio, 100-sumaNivelDeServicio]" [chartType]="doughnutChartType"
+                      [options]="doughnutChartOptions" [colors]="doughnutChartColors2">
+                    </canvas>
+
+                    <canvas baseChart id="myChart2" width="300" height="300" class="pdg"
+                      *ngIf="sumaNivelDeServicio < 70" [data]="[sumaNivelDeServicio, 100-sumaNivelDeServicio]"
+                      [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColors3">
+                    </canvas>
+
+                    <span class="big-grey">
+                      <h5>{{ sumaNivelDeServicio }}%</h5>
+                    </span>
+                  </div>
+
+                  <!-- <div class="col-lg-2 col-xl-2 col-6 text-center">
+
+                  <div class="col-12 text-center font-dashboard-1">Actividad Asist</div>
+
+                  <canvas baseChart id="myChart2" width="300" height="300" class="pdg" *ngIf="sucursal?.actividad_asist > 80"
+                    [data]="[sucursal?.actividad_asist, 100-sucursal?.actividad_asist]"
+                    [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColors1">
+                  </canvas>
+
+                  <canvas baseChart id="myChart2" width="300" height="300" class="pdg" *ngIf="sucursal?.actividad_asist >= 70 && sucursal?.actividad_asist <= 80"
+                    [data]="[sucursal?.actividad_asist, 100-sucursal?.actividad_asist]"
+                    [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColors2">
+                  </canvas>
+
+                  <canvas baseChart id="myChart2" width="300" height="300" class="pdg" *ngIf="sucursal?.actividad_asist < 70"
+                    [data]="[sucursal?.actividad_asist, 100-sucursal?.actividad_asist]"
+                    [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="doughnutChartColors3">
+                  </canvas>
+
+                  <span class="big-grey">
+                    <h5>{{ sucursal?.actividad_asist }}%</h5>
+                  </span>
+                </div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-0 col-0">
+
+              <div class="title-grey"><i class="fas fa-users"></i> Servicios de Atención</div>
+
+              <div class="content-white no-padding">
+
+                <table class="t-products">
+
+                  <colgroup>
+                    <col span="5" style="border-left: 1px solid #e7e7e7;">
+                  </colgroup>
+
+                  <thead>
+
+                    <tr>
+                      <td><i class="fas fa-hashtag"></i> Metricas</td>
+                      <td>Clientes en Espera</td>
+                      <td>% Abandono</td>
+                      <td>Nivel de Servicio</td>
+                      <!-- <td>T. Max Espera</td> -->
+                      <td>T. Med Espera</td>
+                      <!-- <td>T. Max Atención</td> -->
+                      <td> T. Med Atención</td>
+                      <td>Ticket Emitidos</td>
+                      <td class="pl-1 pr-1">Atendidos Normales</td>
+                      <td class="pl-1 pr-1">Atendidos Especiales</td>
+                      <td class="pl-1 pr-1">Abandonos</td>
+
+                    </tr>
+                  </thead>
+
+                  <tr *ngFor="let servicio of servicioAtencion">
+                    <td class="text-left pl-2">{{ servicio.nombre_servicio }}</td>
+                    <td class="text-right pr-4">{{ servicio.clientes_espera }}</td>
+                    <td [ngClass]="{
+                   'red-t': servicio.porcentaje_abandono > 20,
+                   'yellow-t': servicio.porcentaje_abandono >= 10 && servicio.porcentaje_abandono <= 20,
+                   'green-t': servicio.porcentaje_abandono < 10
+                 }">{{
+                     servicio.porcentaje_abandono }}%</td>
+                    <td [ngClass]="{
+                   'red-t': servicio.nivel_servicio < 70,
+                   'yellow-t': servicio.nivel_servicio >= 70 && servicio.nivel_servicio <= 80,
+                   'green-t': servicio.nivel_servicio > 80
+                 }">{{
+                     servicio.nivel_servicio | number : '1.1' }}%</td>
+                    <!-- <td [ngClass]="{
+                   'red': servicio.tiempo_max_espera > 720,
+                   'yellow': servicio.tiempo_max_espera >= 480 && servicio.tiempo_max_espera <= 720,
+                   'green': servicio.tiempo_max_espera < 480
+                 }">{{
+                     servicio.tiempo_max_espera | convertirSegundosHora }}</td> -->
+                    <td [ngClass]="{
+                   'red-t': servicio.tiempo_medio_espera > 600,
+                   'yellow-t': servicio.tiempo_medio_espera >= 300 && servicio.tiempo_medio_espera <= 600,
+                   'green-t': servicio.tiempo_medio_espera < 300
+                 }">{{
+                     servicio.tiempo_medio_espera | convertirSegundosHora }}</td>
+                    <!-- <td [ngClass]="{
+                   'red': servicio.tiempo_max_atencion > 900,
+                   'yellow': servicio.tiempo_max_atencion >= 600 && servicio.tiempo_max_atencion <= 900,
+                   'green': servicio.tiempo_max_atencion < 600
+                 }">{{
+                     servicio.tiempo_max_atencion | convertirSegundosHora }}</td> -->
+                    <td [ngClass]="{
+                   'red-t': servicio.tiempo_medio_atencion > 600,
+                   'yellow-t': servicio.tiempo_medio_atencion >= 300 && servicio.tiempo_medio_atencion <= 600,
+                   'green-t': servicio.tiempo_medio_atencion < 300
+                 }">{{
+                     servicio.tiempo_medio_atencion | convertirSegundosHora }}</td>
+                    <td class="text-right pr-4">{{ servicio.ticket_emitidos }}</td>
+                    <td class="text-right pr-4">{{ servicio.clientes_atendidos }}</td>
+                    <td class="text-right pr-4">{{ servicio.clientes_atendidos_especiales }}</td>
+                    <td class="text-right pr-4">{{ servicio.clientes_abandonados }}</td>
+
+                  </tr>
+
+                </table>
+
+              </div>
+
+            </div>
+
+            <div class="col-12">
+
+              <div class="title-grey"><i class="fas fa-users"></i> Ejecutivos Comerciales</div>
+
+              <div class="content-white no-padding">
+
+                <table class="t-products">
+
+                  <colgroup>
+                    <col span="5" style="border-left: 1px solid #e7e7e7;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <td><i class="fas fa-user"></i> </td>
+                      <td>
+                        <!--<i class="fas fa-hashtag"></i>-->Nombre</td>
+                      <td>Estado</td>
+                      <td>Tiempo Ultimo Estado</td>
+                      <td>Tiempo Medio Atención</td>
+                      <!-- <td>Actividad</td> -->
+                      <td>Atendidos</td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr *ngFor="let ejecutivo of asistente">
+                      <td class="fas fa-user" [ngClass]="{
+                       'red-t': ejecutivo.estado == 'Colacion' || ejecutivo.estado == 'Baño' || ejecutivo.estado == 'Inicio Login',
+                       'green-t': ejecutivo.estado == 'Atendiendo' || ejecutivo.estado == ''
+                     }"></td>
+                      <td class="text-left pl-2">{{ ejecutivo.nombre_ejecutivo }}</td>
+                      <td *ngIf="ejecutivo.estado != ''">{{ ejecutivo.estado }}</td>
+                      <td *ngIf="ejecutivo.estado == ''">En Espera de clientes</td>
+                      <td *ngIf="ejecutivo.tiempo >= '0'">{{ ejecutivo.tiempo | convertirSegundosHora }}</td>
+                      <td *ngIf="ejecutivo.tiempo < '0'">00:00:00</td>
+                      <td>{{ ejecutivo.tiempo_atencion | convertirSegundosHora }}</td>
+                      <!-- <td [ngClass]="{
+                     'red': ejecutivo.actividad < 75,
+                     'yellow': ejecutivo.actividad >= 75 && ejecutivo.actividad <=85,
+                     'green': ejecutivo.actividad > 85
+                   }">{{
+                       ejecutivo.actividad }}%</td> -->
+                      <td class="text-right pr-4">{{ ejecutivo.atendidos }}</td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="error == true">
+      <div class="content-white no-padding alert-danger">
+
+        <div class="title-grey">
+          <h3 class="big-grey text-white">Error</h3>
+        </div>
+
+        <h2 class="big-grey blue-t die-m-t"><i class="fas fa-cube"></i>
+          <p class="font-dashboard fail">
+            No existe la sucursal seleccionada.
+          </p>
+        </h2>
+        <button class="btn btn-form" (click)="volver()">Volver <i class="fas fa-undo-alt"></i></button>
+
+      </div>
+    </ng-container>
+
+
+  </div>
+</div>

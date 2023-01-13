@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+
+    <!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+
+            <div class="tittle-inside"><span>Estado diario ejecutivos</span></div>
+            <div class="arrow-right"></div>
+
+            <div class="row row-explorer">
+                    
+                <div class="col-12">
+
+                    <app-estado-de-ejecutivos-form #formulario [hidden]="!mostrarForm"></app-estado-de-ejecutivos-form>
+
+               
+                        <app-estado-de-ejecutivos-tabla #tabla [hidden]="!mostrarTabla"></app-estado-de-ejecutivos-tabla>
+                    
+
+                </div>
+            </div>
+
+            <app-estado-de-ejecutivos-reporte #reporte [hidden]="!mostrarReporte"></app-estado-de-ejecutivos-reporte>
+
+        </div>
+
+    </div>
+
+</div>

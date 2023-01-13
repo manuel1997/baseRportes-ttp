@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Resumen de Oficina</span></div>
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+      
+        <div class="col-lg-6 col-12 col-md-12 col-sm-6">
+
+          <app-resumen-de-oficina-form #form [hidden]='!mostrarFormulario'></app-resumen-de-oficina-form>
+
+        </div>
+        <div class="col-lg-6 col-12 col-md-12 col-sm-6">
+          <div class="content-white no-padding">
+            <app-serie-radio #series [hidden]='!mostrarSerie'></app-serie-radio>
+          </div>
+        </div>
+      </div>
+
+      <app-resumen-de-oficina-tabla #tabla [hidden]='!mostrarTabla'></app-resumen-de-oficina-tabla>
+      <app-resumen-de-oficina-reporte #reporte [hidden]='!mostrarReporte'></app-resumen-de-oficina-reporte>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!--
+<br />
+<h2>Resumen de Oficina</h2>
+<br />
+<div class="row">
+  <div class="col-lg-8">
+    <app-resumen-de-oficina-form #form [hidden]='!mostrarFormulario'></app-resumen-de-oficina-form>
+  </div>
+  <div class="col-lg-4">
+    <app-serie-radio #series [hidden]='!mostrarSerie'></app-serie-radio>
+  </div>
+</div>
+<app-resumen-de-oficina-tabla #tabla [hidden]='!mostrarTabla'></app-resumen-de-oficina-tabla>
+<app-resumen-de-oficina-reporte #reporte [hidden]='!mostrarReporte'></app-resumen-de-oficina-reporte>
+-->

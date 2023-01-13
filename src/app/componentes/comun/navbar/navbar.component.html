@@ -1,0 +1,45 @@
+<nav class="navbar bg-light justify-content-left shadow fixed-top">
+
+  <div class="row extendida">
+
+    <div class="col-7 col-lg-2 col-md-3 col-sm-6">
+      <a class="navbar-brand" [routerLink]="['/oficinasZonas']"><img src="assets/img/total-pack-logo.svg" alt="" height="30"></a>
+    </div>
+    <div class="col-1 col-lg-6 col-md-3 col-sm-1 text-left">
+      <button type="button" id="sidebarCollapse" class="btn-menu" >
+        <i class="fas fa-bars"   title="Menú"></i>
+      </button><span class="text-bar">SISTEMA DE REPORTES</span>
+    </div>
+    <div class="col-1  col-lg-1 col-md-1 col-sm-1">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+      <a [routerLink]="['/oficinasZonas']" class="pl-0 ml-3"> <i class="fas fa-home text-icon-bar"  title="Inicio"></i></a>
+    </div>
+    <div class="col-1  col-lg-2 col-md-4 col-sm-2 text-right" title="Usuario">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+      <i class="fas us fa-user  text-icon-bar"></i><span class="text-bar-little">{{ nombre_usuario }}</span>
+    </div>
+
+    <!--
+    <div class="col-1  col-lg-2 col-md-2 col-sm-1 text-right">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+      <i class="fas fa-building text-icon-bar"></i> <span class="text-bar-little">Oficina</span>
+    </div>-->
+    <div class="col-1 col-lg-push-1 col-md-1 col-sm-1">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+      <a href="javascript:void(0);" (click)="logout()">
+        <i class="fas fa-sign-out-alt out" title="Salir" ></i> </a>
+
+    </div>
+
+
+  </div>
+
+</nav>

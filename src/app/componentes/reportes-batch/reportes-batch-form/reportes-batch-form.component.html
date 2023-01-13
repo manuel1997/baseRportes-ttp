@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12">
+    <div class="top-button">
+      <button type="button" class="blue-bottom" (click)="buscar()" [disabled]="!parametros.valid">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey">
+      <i class="far fa-file-alt"></i> Parámetros de la búsqueda
+    </div>
+    <div class="content-white">
+      <div class="row mr-1 ml-1">
+        <!-- <form class="row"> -->
+        <form [formGroup]="parametros" class="row">
+          <div class="col-lg-6 col-12">
+            <div class="row">
+              <div class="col-4 pr-0">
+                <label class="input-text"><i class="far fa-calendar-alt blue-icon"></i> Desde</label>
+              </div>
+              <div class="col-8">
+                <input class="input-style float-right" type="date" formControlName="desde">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-12">
+            <div class="row">
+              <div class="col-4 pr-0">
+                <label class="input-text"><i class="far fa-calendar-alt blue-icon"></i> Hasta</label>
+              </div>
+              <div class="col-8">
+                <input class="input-style float-right" type="date" formControlName="hasta">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+
+  <!-- Page Content -->
+  <div id="content">
+    <div class="container-fluid">
+
+      <div class="tittle-inside"><span>Tendencia Atenciones</span></div>
+
+      <div class="arrow-right"></div>
+
+      <div class="row row-explorer">
+        <div class="col-12" *ngIf="mostrarForm">
+          <div class="top-button">
+            <button type="button" class="blue-bottom" role="link" (click)="enviar()" data-toggle="tooltip" title="Reportes">
+              <i class="far fa-list-alt"></i>
+            </button>
+            <button type="button" class="blue-bottom btn-green" (click)="excel()" data-toggle="tooltip" title="Exportar Excel">
+              <i class="far fa-file-excel"></i>
+            </button>
+            <button type="button" class="blue-bottom red" role="link" (click)="grafica()" data-toggle="tooltip" title="Reportes Gráficos">
+              <i class="fas fa-chart-line"></i>
+            </button>
+            <button type="button" class="blue-bottom yellow" role="link" (click)="porcentaje()" data-toggle="tooltip" title="Reportes Porcentual">
+              <i class="fas fa-percentage"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+          <app-tendencia-atencion-form #parametros [hidden]="!mostrarForm"></app-tendencia-atencion-form>
+
+       
+            <app-series #resumen [hidden]="!mostrarForm"></app-series>
+         
+        </div>
+        <div class="col-lg-6 col-12 col-md-6 col-sm-6">
+          <app-oficinas #oficinas [hidden]="!mostrarForm"></app-oficinas>
+        </div>
+
+      </div>
+
+      <app-tendencia-atencion-reporte #reporte [hidden]="!mostrarReporte"></app-tendencia-atencion-reporte>
+      <app-tendencia-de-atencion-graficos #graficos [hidden]="!mostrarGrafica"></app-tendencia-de-atencion-graficos>
+      <app-tendencia-atencion-porcentuaje #porcentuaje [hidden]="!mostrarPorcentuaje"></app-tendencia-atencion-porcentuaje>
+
+    </div>
+  </div>
+</div>

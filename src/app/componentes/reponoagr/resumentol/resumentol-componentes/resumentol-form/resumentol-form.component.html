@@ -1,0 +1,17 @@
+<div class="title-grey"><i class="far fa-file-alt"></i>  Parámetros del Reporte</div>
+<div class="content-white">
+  <div class="row ml-1 mr-1">
+    <form class="row" [formGroup]="parametros" (ngSubmit)="enviar()">
+
+      <div class="col-4 col-xs-12">
+        <label class="input-text">Mes</label>
+      </div>
+
+      <div class="col-8">
+        <input class="input-style" type="date" formControlName="mes">
+
+      </div>
+      
+    </form>
+  </div>
+</div>

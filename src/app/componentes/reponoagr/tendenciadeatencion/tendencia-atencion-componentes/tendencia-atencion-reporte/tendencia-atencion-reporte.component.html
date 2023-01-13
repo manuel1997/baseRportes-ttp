@@ -1,0 +1,99 @@
+<div class="row row-explorer">
+  <div class="col-12">
+    <div class="top-button">
+        <button type="button" class="btn btn-form" role="link" (click)="atras()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="title-grey"><i class="far fa-calendar-check"></i> Fecha </div>
+    <div class="content-white">
+
+      <div class="row">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-12">
+          <h3 class="big-grey"><i class="far fa-calendar"></i> Rango de Fechas</h3>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-12 mt-1">
+            <i class="fas fa-clock blue-icon die-m-t"></i>
+          <span class="color-blue">{{ superior[0] }} al {{ superior[1] }}</span>
+        </div>
+        <div class="col-lg-5 col-xl-5 col-md-5 col-sm-12">
+          <!--<label class="input-text die-m-t">Filtrar por Rango :
+            <input class="input-style float-right cin-p">
+          </label>
+          <button class="blue-bottom-small float-right die-m-t">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+          </button>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="content-white no-padding">
+      <table class="t-products">
+        <colgroup>
+          <col span="11" style="border: 1px solid #e7e7e7;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td rowspan="2">Oficina</td>
+            <td rowspan="2">Serie</td>
+            <td [attr.colspan]="this.periodos.length">
+                {{ this.rango }}
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let periodo of periodos">{{ periodo }}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dato of datos; let i = index">
+            <td *ngFor="let dat of dato; let j = index" [attr.rowspan]="j == 0 ? datos[0][0] : ''"
+            [hidden]="j == 0">
+              <i *ngIf="j == 0" class="fas fa-building"></i>
+              {{ dat=='TOT' ? 'Totales' : dat }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" style="display:none;" id="divReporte">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h1>Tendencia de Atencion (No Agrupado)</h1>
+
+    <table width="50%" border='1'>
+      <tr>
+      <td align="right"><b>Rango de Fechas</b></td>
+      <td><b>{{ superior[0] }} al {{ superior[1] }}</b></td>
+      </tr>
+    </table>
+    <br>
+    <table width="90%" border='1'>
+      <tr align="center">
+        <td rowspan="2"><b>Oficina</b></td>
+        <td rowspan="2"><b>Serie</b></td>
+        <td [attr.colspan]="this.periodos.length">
+            {{ this.rango }}
+        </td>
+      </tr>
+      <tr align="center">
+        <td width="40" *ngFor="let periodo of periodos">{{ periodo }}</td>
+      </tr>
+      <tr align="right" *ngFor="let dato of datos; let i = index">
+        <td *ngFor="let dat of dato; let j = index" [attr.rowspan]="j == 0 ? datos[0][0] : ''"
+        [hidden]="j == 0">
+          {{ dat=='TOT' ? 'Totales' : dat }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="loader" [ngClass]="{'loader': gifCarga}"></div>

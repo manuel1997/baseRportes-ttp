@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="loader" [ngClass]="{'loader': gifCarga}"></div>
+
+    <!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+
+            <div class="tittle-inside"><span>Motivos de Pausa</span></div>
+            <div class="arrow-right"></div>
+
+            <div class="row row-explorer">
+                  
+                <div class="col-12">
+
+                    <app-motivos-de-pausa-form #formulario [hidden]="!mostrarForm"></app-motivos-de-pausa-form>
+
+             
+
+                 
+                        <app-motivos-de-pausa-tabla #tabla [hidden]="!mostrarTabla"></app-motivos-de-pausa-tabla>
+                  
+
+                </div>
+            </div>
+
+            <app-motivos-de-pausa-reporte #reportes [hidden]="!mostrarReporte"></app-motivos-de-pausa-reporte>
+            <app-motivos-de-pausa-graficos #graficos [hidden]="!mostrarGrafico"></app-motivos-de-pausa-graficos>
+
+        </div>
+
+    </div>
+
+</div>

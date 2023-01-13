@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="box-logo text-center">
+    <img class="form-logo" src="assets/img/total-pack-logo.svg" height="40">
+    <form class="form-signin" [formGroup]="login" (ngSubmit)="login_reporte()">
+      <h3 class="color-blue font-weight-bold text-center ">REPORTES</h3>
+      <hr class="mid-mar">
+      <label for="inputEmail" class="sr-only">Contraseña</label>
+      <div class="form-group">
+        <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+            </div>
+            <input formControlName="usuario" type="text" class="form-control" id="inputuser" name="id" placeholder="Usuario" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+          </div>
+          <!-- <input type="password" class="form-control" id="inputPassword" name="pass"
+              formControlName="password" placeholder="Contraseña"> -->
+          <input type="password" class="form-control" id="inputPassword" name="pass"
+              formControlName="password" placeholder="Contraseña" required>
+        </div>
+      </div>
+
+
+        <div class="form-group capchaZomm">
+          <re-captcha (resolved)="resolved($event)" siteKey="6LdADe4jAAAAAHlC-Up7RIJzq3n9bH3BcjAqqsUX"></re-captcha>
+      </div>
+
+
+        <button class="btn btn-form" type="submit">
+          Ingresar <i class="far fa-arrow-alt-circle-right"></i>
+        </button>
+
+        <div class="alert alert-primary" role="alert" *ngIf="!errorlogin">
+          Usuario o contraseña incorrectas.
+        </div>
+
+    </form>
+  </div>
+</div>

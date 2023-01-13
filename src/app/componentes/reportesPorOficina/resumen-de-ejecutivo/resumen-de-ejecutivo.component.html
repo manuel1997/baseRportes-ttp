@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+
+    <!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+
+            <div class="tittle-inside"><span>Resumen de ejecutivo</span></div>
+            <div class="arrow-right"></div>
+
+            <div class="row row-explorer">
+                    
+                <div class="col-12">
+
+                    <app-resumen-de-ejecutivo-form #formulario [hidden]="!mostrarForm"></app-resumen-de-ejecutivo-form>
+
+           
+              
+                        <app-resumen-de-ejecutivo-tabla #tabla [hidden]="!mostrarTabla"></app-resumen-de-ejecutivo-tabla>
+                    </div>
+
+                
+            </div>
+
+            <app-resumen-de-ejecutivo-reporte #reporte [hidden]="!mostrarReporte"></app-resumen-de-ejecutivo-reporte>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--
+<br />
+<h2>Resumen de ejecutivo</h2>
+<br />
+<app-resumen-de-ejecutivo-form #formulario [hidden]="!mostrarForm"></app-resumen-de-ejecutivo-form>
+<app-resumen-de-ejecutivo-tabla #tabla [hidden]="!mostrarTabla"></app-resumen-de-ejecutivo-tabla>
+<app-resumen-de-ejecutivo-reporte #reporte [hidden]="!mostrarReporte"></app-resumen-de-ejecutivo-reporte>
+-->

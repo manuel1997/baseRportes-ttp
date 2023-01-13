@@ -1,0 +1,6 @@
+.container-fluid{height: 85vh!important;}
+
+@media screen and (min-width: 1500px) {
+.container-fluid {
+        height: 55vh!important;
+}}
